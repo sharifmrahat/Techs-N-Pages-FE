@@ -24,6 +24,7 @@ function classNames(...classes) {
 }
 
 export default function Menubar() {
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -101,7 +102,7 @@ export default function Menubar() {
                 </Disclosure.Button>
               </div>
               <div className="hidden lg:ml-4 lg:block">
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <button
                     type="button"
                     className="flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -111,7 +112,7 @@ export default function Menubar() {
                   </button>
 
                   {/* Profile dropdown */}
-                  <Menu as="div" className="relative ml-4 flex-shrink-0">
+                  {/* <Menu as="div" className="relative ml-4 flex-shrink-0">
                     <div>
                       <Menu.Button className="flex rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="sr-only">Open user menu</span>
@@ -173,8 +174,15 @@ export default function Menubar() {
                         </Menu.Item>
                       </Menu.Items>
                     </Transition>
-                  </Menu>
-                </div>
+                  </Menu> */}
+                {/* </div> */} 
+                <button
+        type="button"
+        className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      >
+        Login
+      </button>
+
               </div>
             </div>
           </div>
@@ -212,6 +220,8 @@ export default function Menubar() {
               </Disclosure.Button>
             </div>
             <div className="border-t border-gray-700 pt-4 pb-3">
+              {/* {
+                loggedIn ? <>
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
                   <img
@@ -255,6 +265,14 @@ export default function Menubar() {
                   Sign out
                 </Disclosure.Button>
               </div>
+                </> : <button>Login</button>
+              } */}
+              <button
+        type="button"
+        className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      >
+        Login
+      </button>
             </div>
           </Disclosure.Panel>
         </>

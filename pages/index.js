@@ -7,7 +7,7 @@ import HeroSection from '../components/HeroSection'
     <div>
       <main>
         <HeroSection></HeroSection>
-        <DisplayBooks books={data?.books.slice(0,6)}></DisplayBooks>
+        <DisplayBooks books={data?.books.slice(0,8)}></DisplayBooks>
       </main>
     </div>
   )
