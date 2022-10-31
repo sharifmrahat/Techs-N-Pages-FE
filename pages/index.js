@@ -6,17 +6,16 @@ import Tags from '../components/Tags'
  function Home({data}) {
   const [randomBooks, setRandomBooks] = useState([])
 
-  useEffect(()=> {
+useEffect(()=> {
  setRandomBooks(data.books.sort(() => Math.random() - Math.random()).slice(0, 8)) 
-  console.log(randomBooks)
-  }, [data, randomBooks])
+  }, [])
 
  
   return (
     <div>
       <main>
         <HeroSection></HeroSection>
-        <DisplayBooks books={randomBooks}></DisplayBooks>
+        <DisplayBooks books={randomBooks} heading="Latest Published Books"></DisplayBooks>
         <Tags></Tags>
       </main>
     </div>
