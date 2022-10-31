@@ -1,13 +1,23 @@
+import { useEffect, useState } from 'react'
 import DisplayBooks from '../components/DisplayBooks'
 import HeroSection from '../components/HeroSection'
+import Tags from '../components/Tags'
 
  function Home({data}) {
-  console.log(data?.books)
+  const [randomBooks, setRandomBooks] = useState([])
+
+  useEffect(()=> {
+ setRandomBooks(data.books.sort(() => Math.random() - Math.random()).slice(0, 8)) 
+  console.log(randomBooks)
+  }, [data, randomBooks])
+
+ 
   return (
     <div>
       <main>
         <HeroSection></HeroSection>
-        <DisplayBooks books={data?.books.slice(0,8)}></DisplayBooks>
+        <DisplayBooks books={randomBooks}></DisplayBooks>
+        <Tags></Tags>
       </main>
     </div>
   )
