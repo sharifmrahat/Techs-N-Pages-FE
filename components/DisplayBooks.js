@@ -11,7 +11,7 @@ export default function DisplayBooks({books, heading}) {
 
         <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
           {books.map((book) => (
-            <Link href={`/books/${book.isbn13}`} key={book.isbn13} className="cursor-pointer hover:-translate-y-1 hover:scale-110 transition duration-300 ease-in-out">
+            <Link href={`/books/${book.isbn13}`} key={book.isbn13} className="cursor-pointer hover:-translate-y-1 hover:scale-90 transition duration-300 ease-in-out">
               <div className="relative">
                 <div className="relative h-72 w-full overflow-hidden rounded-lg">
                   <img
@@ -21,7 +21,7 @@ export default function DisplayBooks({books, heading}) {
                   />
                 </div>
                 <div className="relative mt-4">
-                  <h3 className="text-sm font-medium text-gray-900 overflow-hidden">{book.title.slice(0,40)}</h3>
+                  <h3 className="text-sm font-medium text-gray-900 overflow-hidden">{book.title}</h3>
                   {/* <p className="mt-1 text-sm text-gray-500">{book.color}</p> */}
                 </div>
                 <div className="absolute inset-x-0 top-0 flex h-72 items-end justify-end overflow-hidden rounded-lg p-4">
