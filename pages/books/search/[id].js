@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="text-xl font-bold text-gray-900">Total {books.total} books is found on {bookName.toUpperCase()}</h2>
+        <h2 className="text-xl font-bold text-gray-900">Total {books.total} books is found on {bookName?.toUpperCase()}</h2>
         <button
         type="button"
         className="my-5 block lg:hidden mx-auto items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50"
