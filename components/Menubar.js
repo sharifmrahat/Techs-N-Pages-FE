@@ -20,6 +20,7 @@ import { Bars3Icon, BellIcon, XMarkIcon, SunIcon, MoonIcon } from '@heroicons/re
 import Link from 'next/link'
 import {useTheme} from 'next-themes'
 import useDarkMode from '../hooks/useDarkMode'
+import { useRouter } from 'next/router'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -28,6 +29,7 @@ function classNames(...classes) {
 export default function Menubar() {
   const [colorTheme, setTheme] = useDarkMode()
 
+  const router = useRouter()
   return (
     <Disclosure as="nav" className="bg-slate-300 dark:bg-gray-800 text-slate-800 dark:text-slate-300 transition-all duration-300">
       {({ open }) => (
@@ -50,24 +52,24 @@ export default function Menubar() {
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-4">
                     {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                    <Link href="/" className="rounded-md dark:bg-gray-900 px-3 py-2 text-sm font-medium dark:text-white">
+                    <Link href="/" className={`block rounded-md ${router.pathname === "/" ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800" : ""} px-3 py-2 text-base font-medium`}>
                       Home
                     </Link>
                     <Link
                       href="/books"
-                      className="rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+                      className={`block rounded-md ${router.pathname === "/books" ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800" : ""} px-3 py-2 text-base font-medium`}
                     >
                       Books
                     </Link>
                     <Link
                       href="/articles"
-                      className="rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+                      className={`block rounded-md ${router.pathname === "/articles" ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800" : ""} px-3 py-2 text-base font-medium`}
                     >
                       Articles
                     </Link>
                     <Link
                       href="/contact"
-                      className="rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+                      className={`block rounded-md ${router.pathname === "/contact" ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800" : ""} px-3 py-2 text-base font-medium`}
                     >
                       Contact
                     </Link>
@@ -86,12 +88,17 @@ export default function Menubar() {
                     <input
                       id="search"
                       name="search"
-                      className="block w-full rounded-md border border-transparent dark:bg-gray-700 py-2 pl-10 pr-3 leading-5 text-gray-300 placeholder-gray-400 focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white sm:text-sm"
+                      className="block w-full rounded-md border border-transparent bg-slate-100 dark:bg-gray-700 py-2 pl-10 pr-3 leading-5 text-slate-900 dark:text-white placeholder-gray-400 focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white sm:text-sm"
                       placeholder="Search"
                       type="search"
                     />
                   </div>
                 </div>
+              </div>
+              <div className='px-3 block lg:hidden'>
+              {
+          colorTheme === "light" ? <button onClick={()=> setTheme(colorTheme)} className='block mx-auto'> <SunIcon className='w-6 h-6  text-slate-800 dark:text-slate-300 dark:hover:text-slate-400 rounded-full transition-all duration-300'></SunIcon></button> : <button onClick={()=> setTheme(colorTheme)} className='block mx-auto'> <MoonIcon className='w-6 h-6 text-slate-800 dark:text-slate-300 dark:hover:text-slate-400 rounded-full transition-all duration-300'></MoonIcon></button>
+        }
               </div>
               <div className="flex lg:hidden">
                 {/* Mobile menu button */}
@@ -192,35 +199,35 @@ export default function Menubar() {
               </div>
             </div>
           </div>
-
+          
           <Disclosure.Panel className="lg:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
               <Disclosure.Button
                 as="a"
                 href="/"
-                className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+                className={`block rounded-md ${router.pathname === "/" ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800" : ""} px-3 py-2 text-base font-medium`}
               >
                 Home
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
                 href="/books"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                className="block rounded-md px-3 py-2 text-base font-medium "
               >
                 Books
               </Disclosure.Button>
               <Disclosure.Button
                 as="Link"
                 href="/articles"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                className="block rounded-md px-3 py-2 text-base font-medium "
               >
                 Articles
               </Disclosure.Button>
               <Disclosure.Button
                 as="Link"
                 href="/contact"
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                className="block rounded-md px-3 py-2 text-base font-medium"
               >
                 Contact
               </Disclosure.Button>
@@ -279,9 +286,7 @@ export default function Menubar() {
       >
         Login
       </button> */}
-      {
-          colorTheme === "light" ? <button onClick={()=> setTheme(colorTheme)} className='block mx-auto'> <SunIcon className='w-7 h-7 text-slate-800 dark:text-slate-300 dark:hover:text-slate-400 rounded-full transition-all duration-300'></SunIcon></button> : <button onClick={()=> setTheme(colorTheme)} className='block mx-auto'> <MoonIcon className='w-7 h-7 text-slate-800 dark:text-slate-300 dark:hover:text-slate-400 rounded-full transition-all duration-300'></MoonIcon></button>
-        }
+     
             </div>
           </Disclosure.Panel>
         </>

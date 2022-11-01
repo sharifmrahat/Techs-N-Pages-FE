@@ -179,13 +179,13 @@ const navigation = {
                   id="email-address"
                   autoComplete="email"
                   required
-                  className="w-full min-w-0 appearance-none rounded-md border border-transparent dark:bg-white py-2 px-4 text-base dark:text-gray-900 placeholder-gray-500 focus:border-white focus:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="w-full min-w-0 appearance-none rounded-md border border-transparent  px-4 text-base bg-slate-100 dark:bg-gray-700 py-2 pl-10 pr-3 leading-5 text-slate-900 dark:text-white placeholder-gray-400 focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white"
                   placeholder="Enter your email"
                 />
                 <div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
                   <button
                     type="submit"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-500 py-2 px-4 text-base font-medium   hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-500 text-slate-100 py-2 px-4 text-base font-medium   hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800"
                   >
                     Subscribe
                   </button>
