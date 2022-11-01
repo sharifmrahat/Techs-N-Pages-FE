@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { data } from "autoprefixer";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -16,10 +17,17 @@ import { useEffect, useState } from "react";
         .then(data => setBooks(data))
     },[pageNo])
 
+    const remaining = pageNo === Math.ceil(books.total/10) ? books.total - ((pageNo -1)*10) : 10
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="text-xl font-bold text-gray-900">Total {books.total} books is found on {bookName.toUpperCase()}</h2>
+        <button
+        type="button"
+        className="my-5 block lg:hidden mx-auto items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50"
+      >
+         Page: {pageNo} {"  |  "}Books:  {((pageNo -1)*10) + 1} to {((pageNo -1)*10) + remaining } out of {books.total}
+      </button>
         <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-5 xl:gap-x-8">
           {books?.books?.map((book) => (
             <Link href={`/books/${book.isbn13}`} key={book.isbn13} className="cursor-pointer hover:-translate-y-1 hover:scale-90 transition duration-300 ease-in-out">
@@ -54,19 +62,24 @@ import { useEffect, useState } from "react";
             </Link>
           ))}
         </div>
-        <div className="flex flex-1 justify-between my-10">
+        <div className="flex flex-1 justify-between my-10 items-center">
           <button
           disabled={pageNo === 1}
           onClick={()=> pageNo === 1 ? setBooks(1) : setPageNo(pageNo-1)}
-            className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Previous
           </button>
-          <h5 className="font-bold">Page No: {pageNo}</h5>
+          <button
+        type="button"
+        className="hidden lg:inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50"
+      >
+         Page: {pageNo} {"  |  "}Books:  {((pageNo -1)*10) + 1} to {((pageNo -1)*10) + remaining } out of {books.total}
+      </button>
           <button
           disabled={pageNo === Math.ceil(books.total/10)}
            onClick={() => pageNo === Math.ceil(books.total/10) ? setPageNo(Math.ceil(books.total/10)) : setPageNo(pageNo+1)}
-            className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Next
           </button>

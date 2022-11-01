@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-typos */
 /* eslint-disable @next/next/no-img-element */
 /*
   This example requires some changes to your config:
@@ -24,9 +25,9 @@ function classNames(...classes) {
   }
 
  function BookDetails({data}) {
-    
+    console.log(data)
   return (
-    <div className="bg-white">
+    <div className="bg-white px-5 lg:px-0">
       <div className="mx-auto max-w-2xl py-12 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
         {/* Product details */}
         <div className="lg:max-w-lg lg:self-end">
@@ -35,12 +36,18 @@ function classNames(...classes) {
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{data.title}</h1>
           </div>
 
-          <section aria-labelledby="information-heading" className="mt-4">
-            <h2 id="information-heading" className="sr-only">
-              Product information
+          <section aria-labelledby="information-heading" className="my-4 text-slate-600">
+            <h2 id="information-heading" className="">
+            Author: {data.authors}
+            </h2>
+            <h2 id="information-heading" className="">
+            Publisher: {data.publisher} | Year: {data.year}
+            </h2>
+            <h2 id="information-heading" className="">
+            Pages: {data.pages}
             </h2>
 
-            <div className="flex items-center">
+            <div className="flex items-center mt-4">
               <p className="text-lg text-gray-900 sm:text-xl">{data.price}</p>
 
               <div className="ml-4 border-l border-gray-300 pl-4">
@@ -167,7 +174,7 @@ function classNames(...classes) {
 }
 
 
-export async function getStaticProps(ctx){
+export async function getServerSideProps(ctx){
 
     const {params} = ctx
     const res = await fetch(`https://api.itbook.store/1.0/books/${params?.id}`)
@@ -178,19 +185,18 @@ export async function getStaticProps(ctx){
         }
     }
 }
-
-export async function getStaticPaths() {
-    const res = await fetch("https://api.itbook.store/1.0/new")
-    const data = await res.json()
-    const paths = data.books.map(book => {
-        return {
-            params: {id: book.isbn13}
-        }
-    })
-    return {
-      paths: paths,
-      fallback: false, // can also be true or 'blocking'
-    }
-  }
+// export async function getStaticPaths() {
+//     const res = await fetch("https://api.itbook.store/1.0/new")
+//     const data = await res.json()
+//     const paths = data.books.map(book => {
+//         return {
+//             params: {id: book.isbn13}
+//         }
+//     })
+//     return {
+//       paths: paths,
+//       fallback: false, // can also be true or 'blocking'
+//     }
+//   }
 
   export default BookDetails
