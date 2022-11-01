@@ -13,20 +13,23 @@
   }
   ```
 */
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, BellIcon, XMarkIcon, SunIcon, MoonIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import {useTheme} from 'next-themes'
+import useDarkMode from '../hooks/useDarkMode'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Menubar() {
+  const [colorTheme, setTheme] = useDarkMode()
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-slate-300 dark:bg-gray-800 text-slate-800 dark:text-slate-300 transition-all duration-300">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
@@ -47,24 +50,24 @@ export default function Menubar() {
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-4">
                     {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                    <Link href="/" className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">
+                    <Link href="/" className="rounded-md dark:bg-gray-900 px-3 py-2 text-sm font-medium dark:text-white">
                       Home
                     </Link>
                     <Link
                       href="/books"
-                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                      className="rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                       Books
                     </Link>
                     <Link
                       href="/articles"
-                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                      className="rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                       Articles
                     </Link>
                     <Link
                       href="/contact"
-                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                      className="rounded-md px-3 py-2 text-sm font-medium dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
                     >
                       Contact
                     </Link>
@@ -78,12 +81,12 @@ export default function Menubar() {
                   </label>
                   <div className="relative">
                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                      <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                      <MagnifyingGlassIcon className="h-5 w-5 dark:ext-gray-400" aria-hidden="true" />
                     </div>
                     <input
                       id="search"
                       name="search"
-                      className="block w-full rounded-md border border-transparent bg-gray-700 py-2 pl-10 pr-3 leading-5 text-gray-300 placeholder-gray-400 focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white sm:text-sm"
+                      className="block w-full rounded-md border border-transparent dark:bg-gray-700 py-2 pl-10 pr-3 leading-5 text-gray-300 placeholder-gray-400 focus:border-white focus:bg-white focus:text-gray-900 focus:outline-none focus:ring-white sm:text-sm"
                       placeholder="Search"
                       type="search"
                     />
@@ -176,12 +179,15 @@ export default function Menubar() {
                     </Transition>
                   </Menu> */}
                 {/* </div> */} 
-                <button
+                {/* <button
         type="button"
         className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
         Login
-      </button>
+      </button> */}
+        {
+          colorTheme === "light" ? <button onClick={()=> setTheme(colorTheme)} className='block mx-auto'> <SunIcon className='w-7 h-7 dark:text-slate-300 dark:hover:text-slate-400 rounded-full transition-all duration-300'></SunIcon></button> : <button onClick={()=> setTheme(colorTheme)} className='block mx-auto'> <MoonIcon className='w-7 h-7 dark:text-slate-300 dark:hover:text-slate-400 rounded-full transition-all duration-300'></MoonIcon></button>
+        }
 
               </div>
             </div>
@@ -267,12 +273,15 @@ export default function Menubar() {
               </div>
                 </> : <button>Login</button>
               } */}
-              <button
+              {/* <button
         type="button"
         className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
         Login
-      </button>
+      </button> */}
+      {
+          colorTheme === "light" ? <button onClick={()=> setTheme(colorTheme)} className='block mx-auto'> <SunIcon className='w-7 h-7 text-slate-800 dark:text-slate-300 dark:hover:text-slate-400 rounded-full transition-all duration-300'></SunIcon></button> : <button onClick={()=> setTheme(colorTheme)} className='block mx-auto'> <MoonIcon className='w-7 h-7 text-slate-800 dark:text-slate-300 dark:hover:text-slate-400 rounded-full transition-all duration-300'></MoonIcon></button>
+        }
             </div>
           </Disclosure.Panel>
         </>

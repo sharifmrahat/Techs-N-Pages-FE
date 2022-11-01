@@ -10,9 +10,12 @@ function MyApp({ Component, pageProps }) {
         <meta name="description" content="Tech Books Web App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Menubar></Menubar>
-      <Component {...pageProps} />
+
+      <Menubar className="dark"></Menubar>
+      <Component {...pageProps} className="dark"/>
       <Footer></Footer>
+
+      
   </> 
 }
 
