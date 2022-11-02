@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
+import BooksCard from '../components/BooksCard'
 import Companies from '../components/Companies'
-import DisplayBooks from '../components/DisplayBooks'
 import Features from '../components/Feature'
 import HeroSection from '../components/HeroSection'
 import Stats from '../components/Stats'
@@ -10,7 +10,7 @@ import Tags from '../components/Tags'
   const [randomBooks, setRandomBooks] = useState([])
 
 useEffect(()=> {
- setRandomBooks(data.books.sort(() => Math.random() - Math.random()).slice(0, 8)) 
+ setRandomBooks(data.books.sort(() => Math.random() - Math.random()).slice(0, 10)) 
   }, [])
 
  
@@ -19,7 +19,7 @@ useEffect(()=> {
       <main className='font-primary px-5 lg:px-8 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200'>
         <HeroSection></HeroSection>
         <Stats></Stats>
-        <DisplayBooks books={randomBooks} heading="Latest Published Books"></DisplayBooks>
+        <BooksCard books={randomBooks} heading="Latest Published Books"></BooksCard>
         <Features></Features>
         <Tags></Tags>
         <Companies></Companies>
