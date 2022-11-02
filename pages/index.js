@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import Companies from '../components/Companies'
 import DisplayBooks from '../components/DisplayBooks'
 import HeroSection from '../components/HeroSection'
+import Stats from '../components/Stats'
 import Tags from '../components/Tags'
 
  function Home({data}) {
@@ -16,7 +18,9 @@ useEffect(()=> {
       <main>
         <HeroSection></HeroSection>
         <DisplayBooks books={randomBooks} heading="Latest Published Books"></DisplayBooks>
+        <Stats></Stats>
         <Tags></Tags>
+        <Companies></Companies>
       </main>
     </div>
   )
