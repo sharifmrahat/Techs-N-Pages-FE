@@ -16,7 +16,7 @@ useEffect(()=> {
  
   return (
     <>
-      <main className='font-primary'>
+      <main className='font-primary px-5 lg:px-8 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200'>
         <HeroSection></HeroSection>
         <Stats></Stats>
         <DisplayBooks books={randomBooks} heading="Latest Published Books"></DisplayBooks>

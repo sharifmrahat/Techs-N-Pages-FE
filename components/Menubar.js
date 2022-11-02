@@ -21,7 +21,8 @@ import Link from 'next/link'
 import {useTheme} from 'next-themes'
 import useDarkMode from '../hooks/useDarkMode'
 import { useRouter } from 'next/router'
-
+import Image from 'next/image'
+import logo from '../public/images/logo.png'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -31,7 +32,7 @@ export default function Menubar() {
 
   const router = useRouter()
   return (
-    <Disclosure as="nav" className="bg-slate-300 dark:bg-gray-800 text-slate-800 dark:text-slate-300 transition-all duration-300 font-primary">
+    <Disclosure as="nav" className="bg-slate-300 dark:bg-gray-800 text-slate-800 dark:text-slate-300 transition-all duration-300 font-primary sticky top-0 z-10">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
@@ -48,7 +49,13 @@ export default function Menubar() {
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                     alt="Your Company"
                   /> */}
-                  <h1 className='text-md lg:text-2xl font-bold text-indigo-600 dark:text-indigo-400 font-heading'>Techs N Pages</h1>
+                 <Link href="/" className='flex flex-row justify-center items-center gap-4'>
+                 <Image
+                 src={logo}
+                 alt="techs-n-pages"
+                 className='w-8 h-8 mb-1 block'
+                 ></Image> <h1 className='hidden lg:block text-md lg:text-2xl font-bold text-indigo-600 dark:text-indigo-400 font-heading'>Techs N Pages</h1>
+                 </Link>
                 </div>
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-4">
@@ -214,21 +221,21 @@ export default function Menubar() {
               <Disclosure.Button
                 as="a"
                 href="/books"
-                className="block rounded-md px-3 py-2 text-base font-medium "
+                className={`block rounded-md ${router.pathname === "/books" ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800" : ""} px-3 py-2 text-base font-medium`}
               >
                 Books
               </Disclosure.Button>
               <Disclosure.Button
                 as="Link"
                 href="/articles"
-                className="block rounded-md px-3 py-2 text-base font-medium "
+                className={`block rounded-md ${router.pathname === "/articles" ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800" : ""} px-3 py-2 text-base font-medium`}
               >
                 Articles
               </Disclosure.Button>
               <Disclosure.Button
                 as="Link"
                 href="/contact"
-                className="block rounded-md px-3 py-2 text-base font-medium"
+                className={`block rounded-md ${router.pathname === "/contact" ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800" : ""} px-3 py-2 text-base font-medium`}
               >
                 Contact
               </Disclosure.Button>
