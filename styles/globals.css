@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins&display=swap');
+
 html,
 body {
   padding: 0;
@@ -18,6 +20,15 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.font-heading{
+  font-family: 'Bebas Neue';
+}
+
+.font-primary{
+  font-family: 'Poppins';
+}
+
 
 @media (prefers-color-scheme: dark) {
   html {

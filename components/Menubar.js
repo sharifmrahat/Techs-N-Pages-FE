@@ -31,14 +31,14 @@ export default function Menubar() {
 
   const router = useRouter()
   return (
-    <Disclosure as="nav" className="bg-slate-300 dark:bg-gray-800 text-slate-800 dark:text-slate-300 transition-all duration-300">
+    <Disclosure as="nav" className="bg-slate-300 dark:bg-gray-800 text-slate-800 dark:text-slate-300 transition-all duration-300 font-primary">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="flex items-center px-2 lg:px-0">
                 <div className="flex-shrink-0">
-                  <img
+                  {/* <img
                     className="block h-8 w-auto lg:hidden"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                     alt="Your Company"
@@ -47,7 +47,8 @@ export default function Menubar() {
                     className="hidden h-8 w-auto lg:block"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                     alt="Your Company"
-                  />
+                  /> */}
+                  <h1 className='text-md lg:text-2xl font-bold text-indigo-600 dark:text-indigo-400 font-heading'>Techs N Pages</h1>
                 </div>
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-4">

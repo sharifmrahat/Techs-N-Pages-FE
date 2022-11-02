@@ -11,8 +11,8 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Menubar className="dark"></Menubar>
-      <Component {...pageProps} className="dark"/>
+      <Menubar></Menubar>
+      <Component {...pageProps}/>
       <Footer></Footer>
 
       

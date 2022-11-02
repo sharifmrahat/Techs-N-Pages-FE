@@ -14,15 +14,15 @@ useEffect(()=> {
 
  
   return (
-    <div>
-      <main>
+    <>
+      <main className='font-primary'>
         <HeroSection></HeroSection>
         <DisplayBooks books={randomBooks} heading="Latest Published Books"></DisplayBooks>
         <Stats></Stats>
         <Tags></Tags>
         <Companies></Companies>
       </main>
-    </div>
+    </>
   )
 }
 
