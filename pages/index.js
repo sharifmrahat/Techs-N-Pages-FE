@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Companies from '../components/Companies'
 import DisplayBooks from '../components/DisplayBooks'
+import Features from '../components/Feature'
 import HeroSection from '../components/HeroSection'
 import Stats from '../components/Stats'
 import Tags from '../components/Tags'
@@ -17,8 +18,9 @@ useEffect(()=> {
     <>
       <main className='font-primary'>
         <HeroSection></HeroSection>
-        <DisplayBooks books={randomBooks} heading="Latest Published Books"></DisplayBooks>
         <Stats></Stats>
+        <DisplayBooks books={randomBooks} heading="Latest Published Books"></DisplayBooks>
+        <Features></Features>
         <Tags></Tags>
         <Companies></Companies>
       </main>

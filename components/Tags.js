@@ -5,7 +5,7 @@ function Tags() {
     const [randomTags, setRandomTags] = useState([])
 
 
-    const tags = ["HTML", "CSS", "JavaScript", "Git", "Github", "React", "Redux", "NextJs", "Firebase", "Computer", "NodeJs", "SQL", "MongoDB", "PhotoShop", "Adobe", "Editing", "Python", "Golang", "Ruby", "Laravel", "Php", "Programming", "Linux", "Ubuntu", "Windows", "Robotics", "AI", "Crypto", "Database", "NoSql", "Azure", "Hacking", "GNU", "SSR", "Java", "Django", "Code", "Unity", "Flutter", "Swift", "VueJs", "Angular", "Unix", "Frontend", "Backend", "API", "DevOps", "Microservice", "Tech", "Illustrator", "Machine", "Web", "Application", "Developer", "FullStack", "Auth", "GraphQL", "Cyber", "Security", "Cloud", "Design", "Interface", "Server", "IDE", "Wordpress", "Web3"]
+    const tags = ["HTML", "CSS", "JavaScript", "Git", "Github", "React", "Redux", "NextJs", "Firebase", "Computer", "NodeJs", "SQL", "MongoDB", "PhotoShop", "Adobe", "Editing", "Python", "Golang", "Ruby", "Laravel", "Php", "Programming", "Linux", "Ubuntu", "Windows", "Robotics", "AI", "Crypto", "Database", "NoSql", "Azure", "Hacking", "GNU", "SSR", "Java", "Django", "Unity", "Flutter", "Swift", "VueJs", "Angular", "Unix", "Frontend", "Backend", "API", "DevOps", "Microservice", "Tech", "Illustrator", "Machine", "Web", "Application", "Developer", "FullStack", "Auth", "GraphQL", "Cyber", "Security", "Cloud", "Design", "Interface", "Server", "IDE", "Wordpress", "Web3"]
 
     useEffect(()=> {
         setRandomTags(tags.sort(() => Math.random() - Math.random())) 
