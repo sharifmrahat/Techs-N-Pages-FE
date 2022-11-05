@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import BooksCard from '../components/BooksCard'
+import Spinner from '../components/common/Spinner'
 import Companies from '../components/Companies'
 import Features from '../components/Feature'
 import HeroSection from '../components/HeroSection'

@@ -1,10 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Link from "next/link";
+import Spinner from "./common/Spinner";
 
   
   export default function BooksCard({books, heading}) {
     return (
+        !books ? <>
+        <Spinner></Spinner>
+        </> : <>
         <div className="mx-auto py-12  max-w-2xl lg:max-w-7xl  bg-white dark:bg-slate-700">
         <h2 className="text-xl lg:text-2xl font-bold pb-10">{heading}</h2>
         <div className="grid gap-16 lg:gap-10 lg:grid-cols-5 mx-5 lg:mx-0">
@@ -30,6 +34,6 @@ import Link from "next/link";
         </div>
         
       </div>
-    )
+        </>    )
   }
   
