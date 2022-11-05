@@ -4,6 +4,7 @@ import { data } from "autoprefixer";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Alert from "../../../components/common/Alert";
 
  function DisplaySearch() {
     const [books, setBooks] = useState([])
@@ -20,7 +21,13 @@ import { useEffect, useState } from "react";
     const remaining = pageNo === Math.ceil(books.total/10) ? books.total - ((pageNo -1)*10) : 10
   return (
     <div className="bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200">
-      <div className="mx-auto max-w-2xl py-12 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+     {
+      !books?.books?.length ? <>
+      <div  className="mx-auto max-w-2xl py-28 px-6 lg:max-w-7xl ">
+      <Alert message={`No books is found about: ${bookName?.length > 25 ? bookName.slice(0,25)+'...' : bookName}`}></Alert>
+      </div>
+      </> : <>
+       <div className="mx-auto max-w-2xl py-12 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="mb-8 text-xl font-bold">Total {books?.total} books is found on {bookName?.length > 25 ? bookName.slice(0,25)+'...' : bookName}</h2>
         <button
         type="button"
@@ -72,6 +79,8 @@ import { useEffect, useState } from "react";
           </button>
         </div>
       </div>
+      </>
+     }
     </div>
   )
 }
