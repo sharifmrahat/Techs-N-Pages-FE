@@ -21,12 +21,12 @@ import { useEffect, useState } from "react";
   return (
     <div className="bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200">
       <div className="mx-auto max-w-2xl py-12 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="mb-8 text-xl font-bold">Total {books?.total} books is found on {bookName.length > 25 ? bookName.slice(0,25)+'...' : bookName}</h2>
+        <h2 className="mb-8 text-xl font-bold">Total {books?.total} books is found on {bookName?.length > 25 ? bookName.slice(0,25)+'...' : bookName}</h2>
         <button
         type="button"
         className="my-5 block lg:hidden mx-auto items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50"
       >
-         Page: {pageNo} {"  |  "}Books:  {((pageNo -1)*10) + 1} to {((pageNo -1)*10) + remaining } out of {books.total}
+         Page: {pageNo} {"  |  "}Books:  {((pageNo -1)*10) + 1} to {((pageNo -1)*10) + remaining } out of {books?.total}
       </button>
       <div className="grid gap-16 lg:gap-10 lg:grid-cols-5 mx-5 lg:mx-0">
         {books.books?.map((book) => (
