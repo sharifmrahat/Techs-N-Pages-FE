@@ -55,7 +55,6 @@ export default function Menubar() {
         });
 
   useEffect(() => {
-    console.log(query);
     fetch(`https://api.itbook.store/1.0/search/${query}`)
       .then((res) => res.json())
       .then((data) => {

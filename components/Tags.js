@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 function Tags() {
     const [randomTags, setRandomTags] = useState([])
 
-
     const tags = ["HTML", "CSS", "JavaScript", "Git", "Github", "React", "Redux", "NextJs", "Firebase", "Computer", "NodeJs", "SQL", "MongoDB", "PhotoShop", "Adobe", "Editing", "Python", "Golang", "Ruby", "Laravel", "Php", "Programming", "Linux", "Ubuntu", "Windows", "Robotics", "AI", "Crypto", "Database", "NoSql", "Azure", "Hacking", "GNU", "SSR", "Java", "Django", "Unity", "Flutter", "Swift", "VueJs", "Angular", "Unix", "Frontend", "Backend", "API", "DevOps", "Microservice", "Tech", "Illustrator", "Machine", "Web", "Application", "Developer", "FullStack", "Auth", "GraphQL", "Cyber", "Security", "Cloud", "Design", "Interface", "Server", "IDE", "Wordpress", "Web3"]
 
     useEffect(()=> {
@@ -15,6 +14,7 @@ function Tags() {
 randomTags.sort(() => Math.random() - Math.random()).forEach(value => {
     buttons.push(<Link href={`/books/search/${value.toLowerCase()}`}
         type="button"
+        key={value}
         className="inline-flex items-center rounded-md  bg-slate-200/50 dark:bg-slate-800 px-3 py-2 text-md font-semibold leading-4 shadow-md cursor-pointer hover:-translate-y-1 hover:scale-110 transition duration-300 ease-in-out"
       >{value}</Link>)
 });
