@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
         fetch(`https://api.itbook.store/1.0/search/${bookName}/${pageNo}`)
         .then(res => res.json())
         .then(data => setBooks(data))
-    },[pageNo])
+    },[pageNo, bookName])
 
     const remaining = pageNo === Math.ceil(books.total/10) ? books.total - ((pageNo -1)*10) : 10
   return (
