@@ -138,14 +138,14 @@ export default function Contact() {
                 </dt>
                 <dd className="flex text-base ">
                   <PhoneIcon className="h-6 w-6 flex-shrink-0 text-slate-100" aria-hidden="true" />
-                  <span className="ml-3 text-slate-100">+1 (555) 123-4567</span>
+                  <span className="ml-3 text-slate-100">+1 (000) 123-4567</span>
                 </dd>
                 <dt>
                   <span className="sr-only">Email</span>
                 </dt>
                 <dd className="flex text-base text-slate-100">
                   <EnvelopeIcon className="h-6 w-6 flex-shrink-0 " aria-hidden="true" />
-                  <span className="ml-3">support@workcation.com</span>
+                  <span className="ml-3">contact@techsnpages.vercel.app</span>
                 </dd>
               </dl>
               <ul role="list" className="mt-8 flex space-x-12 text-slate-100">
