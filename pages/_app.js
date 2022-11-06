@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
   return <>
  
   <Head>
-  <title>Tech N Pages | Tech Books Web App</title>
+  <title>Techs N Pages | Technology Books App</title>
   <meta name="description" content="Tech Books Web App" />
   <link rel="icon" href="/favicon.ico" />
 </Head>

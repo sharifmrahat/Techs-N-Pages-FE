@@ -13,9 +13,16 @@
   ```
 */
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline'
+import Head from 'next/head'
 
 export default function Contact() {
   return (
+   
+    <>
+     <Head>
+    <title>Techs N Pages | Contact</title>
+  </Head>
+    
     <div className="bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-200">
       <div className="mx-auto max-w-7xl pt-10 px-4 pb-28">
         <div className="relative bg-white dark:bg-slate-800 shadow-xl">
@@ -315,5 +322,6 @@ export default function Contact() {
         </div>
       </div>
     </div>
+    </>
   )
 }

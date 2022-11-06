@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image'
 import Link from 'next/link'
-import heroImage from '../public/images/Books.png'
+import heroImage from '../images/Books.png'
 
 export default function HeroSection() {
   return (

@@ -1,9 +1,13 @@
+import Head from "next/head";
 import BooksCard from "../../components/BooksCard";
 
 export default function Books({data}) {
     console.log(data)
     return (
     <>
+    <Head>
+  <title>Techs N Pages | Books</title>
+</Head>
      <main className='font-primary px-5 lg:px-8 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200'>
      <BooksCard books={data.books} heading="Editor's Peak"></BooksCard>
         </main>

@@ -203,7 +203,7 @@ const navigation = {
               ))}
             </div>
             <p className="mt-8 text-base text-slate-700 dark:text-gray-400 md:order-1 md:mt-0">
-              &copy; 2022 Techs N Pages | Made with Love by Sharif.
+              &copy; 2022 <span className="font-bold text-indigo-600 dark:text-indigo-400">Techs N Pages</span>  | Made with love by <a className="font-bold text-indigo-600 dark:text-indigo-400" href="https://github.com/sharifmrahat" target="_blank" rel="noreferrer">Sharif.</a>
             </p>
           </div>
         </div>

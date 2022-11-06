@@ -32,7 +32,7 @@ import Link from "next/link";
 import useDarkMode from "../hooks/useDarkMode";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import logo from "../public/images/logo.png";
+import logo from "../images/logo.png";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -76,14 +76,14 @@ export default function Menubar() {
                 <div className="flex-shrink-0">
                   <Link
                     href="/"
-                    className="flex flex-row justify-center items-center gap-4"
+                    className="flex flex-row justify-center items-center gap-2"
                   >
                     <Image
                       src={logo}
                       alt="techs-n-pages"
-                      className="w-8 h-8 mb-1 block"
+                      className="w-10 block"
                     ></Image>{" "}
-                    <h1 className=" text-xl lg:text-2xl font-bold text-indigo-600 dark:text-indigo-400 font-heading">
+                    <h1 className=" text-xl lg:text-2xl font-bold text-[#6a65d0] dark:text-[#7c76f1] font-heading">
                       Techs N Pages
                     </h1>
                   </Link>
