@@ -34,6 +34,13 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import logo from "../images/logo.png";
 
+const menuLink = [
+  {id: 1, name: 'Home', link: '/'},
+  {id: 2, name: 'Books', link: '/books'},
+  {id: 3, name: 'Articles', link: '/articles'},
+  {id: 4, name: 'Contact', link: '/contact'}
+]
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -90,46 +97,22 @@ export default function Menubar() {
                 </div>
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-4">
-                    <Link
-                      href="/"
-                      className={`block rounded-md ${
-                        router.pathname === "/"
-                          ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800"
-                          : ""
-                      } px-3 py-2 text-base font-medium`}
+                    {
+                      menuLink?.map(menu => 
+                        
+                        <Link
+                      key={menu.id}
+                      href={menu.link}
+                      className={`block p-1 border-2 border-transparent hover:border-indigo-600 dark:hover:border-indigo-500 rounded text-base${
+                        router.pathname === menu.link
+                          && " border-transparent bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 font-bold"
+                      } `}
                     >
-                      Home
+                      {menu.name}
                     </Link>
-                    <Link
-                      href="/books"
-                      className={`block rounded-md ${
-                        router.pathname === "/books"
-                          ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800"
-                          : ""
-                      } px-3 py-2 text-base font-medium`}
-                    >
-                      Books
-                    </Link>
-                    <Link
-                      href="/articles"
-                      className={`block rounded-md ${
-                        router.pathname === "/articles"
-                          ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800"
-                          : ""
-                      } px-3 py-2 text-base font-medium`}
-                    >
-                      Articles
-                    </Link>
-                    <Link
-                      href="/contact"
-                      className={`block rounded-md ${
-                        router.pathname === "/contact"
-                          ? "bg-slate-800 dark:bg-slate-300  text-slate-100 dark:text-slate-800"
-                          : ""
-                      } px-3 py-2 text-base font-medium`}
-                    >
-                      Contact
-                    </Link>
+                      )
+                    }
+                   
                   </div>
                 </div>
               </div>
@@ -407,50 +390,21 @@ export default function Menubar() {
               </div>
             </div>
             <div className="space-y-1 px-2 pt-2 pb-3">
-              <Disclosure.Button
-                as="a"
-                href="/"
-                className={`block rounded-md ${
-                  router.pathname === "/"
-                    ? "bg-slate-800 dark:bg-white  text-slate-100 dark:text-slate-800"
-                    : ""
-                } px-3 py-2 text-base font-medium`}
-              >
-                Home
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="/books"
-                className={`block rounded-md ${
-                  router.pathname === "/books"
-                    ? "bg-slate-800 dark:bg-white  text-slate-100 dark:text-slate-800"
-                    : ""
-                } px-3 py-2 text-base font-medium`}
-              >
-                Books
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="Link"
-                href="/articles"
-                className={`block rounded-md ${
-                  router.pathname === "/articles"
-                    ? "bg-slate-800 dark:bg-white  text-slate-100 dark:text-slate-800"
-                    : ""
-                } px-3 py-2 text-base font-medium`}
-              >
-                Articles
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="Link"
-                href="/contact"
-                className={`block rounded-md ${
-                  router.pathname === "/contact"
-                    ? "bg-slate-800 dark:bg-white  text-slate-100 dark:text-slate-800"
-                    : ""
-                } px-3 py-2 text-base font-medium`}
-              >
-                Contact
-              </Disclosure.Button>
+            {
+                      menuLink?.map(menu => 
+                        
+                        <Link
+                      key={menu.id}
+                      href={menu.link}
+                      className={`block p-1 text-center mx-auto border-2 border-transparent hover:border-indigo-600 dark:hover:border-indigo-500 rounded text-base${
+                        router.pathname === menu.link
+                          && " border-transparent bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 font-bold"
+                      } `}
+                    >
+                      {menu.name}
+                    </Link>
+                      )
+                    }
             </div>
             
           </Disclosure.Panel>
