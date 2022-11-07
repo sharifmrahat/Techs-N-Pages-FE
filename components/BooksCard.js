@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
+// books card is for some pages
+
 import Link from "next/link";
 import Spinner from "./common/Spinner";
 
