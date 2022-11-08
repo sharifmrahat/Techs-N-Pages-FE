@@ -23,7 +23,7 @@ export default function Contact() {
     <title>Techs N Pages | Contact</title>
   </Head>
     
-    <div className="bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-200">
+    <div className="bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-200 font-primary">
       <div className="mx-auto max-w-7xl pt-10 px-4 pb-28">
         <div className="relative bg-white dark:bg-slate-800 shadow-xl">
           <h2 className="sr-only">Contact us</h2>

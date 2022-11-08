@@ -35,10 +35,10 @@ import Image from "next/image";
 import logo from "../images/logo.png";
 
 const menuLink = [
-  {id: 1, name: 'Home', link: '/'},
-  {id: 2, name: 'Books', link: '/books'},
-  {id: 3, name: 'Articles', link: '/articles'},
-  {id: 4, name: 'Contact', link: '/contact'}
+  {id: 1, name: 'Home', link: '/#'},
+  {id: 2, name: 'Books', link: '/books#'},
+  {id: 3, name: 'Articles', link: '/articles#'},
+  {id: 4, name: 'Contact', link: '/contact#'}
 ]
 
 function classNames(...classes) {
@@ -90,7 +90,7 @@ export default function Menubar() {
                       alt="techs-n-pages"
                       className="w-10 block"
                     ></Image>{" "}
-                    <h1 className=" text-xl lg:text-2xl font-bold text-[#6a65d0] dark:text-[#7c76f1] font-heading">
+                    <h1 className="text-[18px] lg:text-2xl font-bold text-[#6a65d0] dark:text-[#7c76f1] font-heading">
                       Techs N Pages
                     </h1>
                   </Link>
@@ -103,7 +103,7 @@ export default function Menubar() {
                         <Link
                       key={menu.id}
                       href={menu.link}
-                      className={`block p-1 border-2 border-transparent hover:border-indigo-600 dark:hover:border-indigo-500 rounded text-base${
+                      className={`block py-1 px-3 border-2 border-transparent hover:border-indigo-600 dark:hover:border-indigo-500 rounded text-base${
                         router.pathname === menu.link
                           && " border-transparent bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 font-bold"
                       } `}
@@ -225,7 +225,7 @@ export default function Menubar() {
                   </div>
                 </div>
               </div>
-              <div className="px-3 block lg:hidden">
+              <div className="pl-4 mr-1 block lg:hidden">
                 {colorTheme === "light" ? (
                   <button
                     onClick={() => setTheme(colorTheme)}
@@ -244,6 +244,14 @@ export default function Menubar() {
                   </button>
                 )}
               </div>
+              <div className="px-3 block lg:hidden">
+              <Link
+                      href="/login"
+                      className={`block border border-transparent py-1 px-2 rounded text-base bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 ml-1`}
+                    >
+                      Login
+                    </Link>
+              </div>
               <div className="flex lg:hidden">
                 {/* Mobile menu button */}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -255,7 +263,7 @@ export default function Menubar() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="hidden lg:ml-4 lg:block">
+              <div className="hidden lg:ml-6 lg:block">
                 {colorTheme === "light" ? (
                   <button
                     onClick={() => setTheme(colorTheme)}
@@ -273,6 +281,14 @@ export default function Menubar() {
                     <MoonIcon className="w-7 h-7 dark:text-slate-300 dark:hover:text-slate-400 rounded-full transition-all duration-300"></MoonIcon>
                   </button>
                 )}
+              </div>
+              <div className="hidden lg:ml-5 lg:block">
+                <Link
+                      href="/login"
+                      className={`block border border-transparent py-1 px-4 rounded text-base bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 ml-4`}
+                    >
+                      Login
+                    </Link>
               </div>
             </div>
           </div>
@@ -396,7 +412,7 @@ export default function Menubar() {
                         <Link
                       key={menu.id}
                       href={menu.link}
-                      className={`block p-1 text-center mx-auto border-2 border-transparent hover:border-indigo-600 dark:hover:border-indigo-500 rounded text-base${
+                      className={`block py-1 px-3 text-center mx-auto border-2 border-transparent hover:border-indigo-600 dark:hover:border-indigo-500 rounded text-base${
                         router.pathname === menu.link
                           && " border-transparent bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 font-bold"
                       } `}
