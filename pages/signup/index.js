@@ -50,14 +50,17 @@ export default function Signup() {
     body: JSON.stringify(userInput)
     })
     .then(res => res.json())
-    .then(data => setResult(data))
+    .then(data => {
+      setResult(data)
+      router.push('/login')
+    })
   }
 
-useEffect(()=> {
-  if(result?.success || currentUser.data){
+  useEffect(()=> {
+    if(currentUser.success){
     router.push('/')
-  }
-}, [result, currentUser, router])
+    }
+  }, [currentUser, router])
 
   return (
     <div className=" bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200 font-primary">

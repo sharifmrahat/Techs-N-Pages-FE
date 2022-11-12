@@ -6,18 +6,18 @@ import Spinner from '../components/common/Spinner'
 import { useEffect, useState } from 'react'
 
 function MyApp({ Component, pageProps }) {
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
  
-  useEffect(()=> {
-  //   if (typeof window !== 'undefined') {
-  //     setLoading(window.onload)
-  // }
+  // useEffect(()=> {
+  // //   if (typeof window !== 'undefined') {
+  // //     setLoading(window.onload)
+  // // }
 
-  setTimeout(() => {
-    setLoading(true)
-   }, 2000);
+  // setTimeout(() => {
+  //   setLoading(true)
+  //  }, 2000);
 
-  }, [])
+  // }, [])
 
   
 
@@ -28,7 +28,10 @@ function MyApp({ Component, pageProps }) {
   <meta name="description" content="Tech Books Web App" />
   <link rel="icon" href="/favicon.ico" />
 </Head>
-  {
+<Menubar></Menubar>
+        <Component {...pageProps}/>
+        <Footer></Footer>
+  {/* {
     !loading ? <>
     <div className="mx-auto h-screen w-full py-28  bg-white dark:bg-slate-700">
       <Spinner type='climb'></Spinner>
@@ -39,7 +42,7 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps}/>
         <Footer></Footer>
     </>
-  }
+  } */}
  
 
       

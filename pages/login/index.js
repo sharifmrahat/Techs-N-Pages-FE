@@ -18,10 +18,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Alert from '../../components/common/Alert'
+import useCurrentUser from '../../hooks/useCurrentUser'
 
 export default function Login() {
 
   const [result, setResult] = useState([])
+  const [currentUser] = useCurrentUser()
   
   const router = useRouter()
 
@@ -55,10 +57,10 @@ export default function Login() {
   }
 
 useEffect(()=> {
-  if(result?.token){
+  if(currentUser.success){
   router.push('/')
   }
-}, [result, router])
+}, [currentUser, router])
 
 
 

@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 
 function useCurrentUser() {
 const [currentUser, setCurrentUser] = useState([])
-const token = localStorage.getItem("accessToken")
+let token;
+    if (typeof window !== 'undefined') {
+            token = localStorage.getItem("accessToken");
+        }
 useEffect(()=> {
     const url = `https://techs-n-pages.onrender.com/api/v1/user/currentUser`
     if(token){
