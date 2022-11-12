@@ -25,7 +25,6 @@ function classNames(...classes) {
   }
 
  function BookDetails({data}) {
-    console.log(data)
   return (
     <div className="bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200 px-5 lg:px-0 font-primary pb-48 lg:pt-6">
       <div className="mx-auto max-w-2xl lg:max-w-7xl flex flex-col-reverse lg:flex-row justify-evenly">

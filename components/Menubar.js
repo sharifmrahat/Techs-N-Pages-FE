@@ -13,8 +13,8 @@
   }
   ```
 */
-import { useEffect, useState } from "react";
-import { Disclosure } from "@headlessui/react";
+import { Fragment, useEffect, useState } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Combobox } from "@headlessui/react";
 import {
   ArrowRightIcon,
@@ -33,6 +33,7 @@ import useDarkMode from "../hooks/useDarkMode";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import logo from "../images/logo.png";
+import useCurrentUser from "../hooks/useCurrentUser";
 
 const menuLink = [
   {id: 1, name: 'Home', link: '/#'},
@@ -41,11 +42,13 @@ const menuLink = [
   {id: 4, name: 'Contact', link: '/contact#'}
 ]
 
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Menubar() {
+  const [currentUser, setCurrentUser] = useCurrentUser()
   const [colorTheme, setTheme] = useDarkMode();
   const [query, setQuery] = useState('');
   const [books, setBooks] = useState([]);
@@ -69,6 +72,11 @@ export default function Menubar() {
         setData(data);
       });
   }, [query]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken')
+    setCurrentUser({success: false})
+  }
 
   return (
     <Disclosure
@@ -283,12 +291,68 @@ export default function Menubar() {
                 )}
               </div>
               <div className="hidden lg:ml-5 lg:block">
-                <Link
+               {
+                !currentUser?.success ?  <>
+                 <Link
                       href="/login"
                       className={`block border border-transparent py-1 px-4 rounded text-base bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 ml-4`}
                     >
                       Login
                     </Link>
+                </> : <>
+                <Menu as="div" className="relative ml-3">
+                  <div>
+                    <Menu.Button className="flex max-w-xs items-center rounded-full text-sm focus:outline-none ">
+                      <span className="sr-only">Open user menu</span>
+                      {
+                        !currentUser?.image ? <>
+                        <span className="inline-block h-10 w-10 overflow-hidden rounded-full bg-slate-800 dark:bg-slate-300">
+    <svg className="h-full w-full text-slate-300  dark:text-slate-800" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+  </span>
+                        </> : <>
+                        <img className="h-8 w-8 rounded-full" src={currentUser?.data?.imageUrl} alt="" />
+                        </>
+                      }
+                     
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-200"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg focus:outline-none">
+                      {/* {userNavigation.map((item) => (
+                        <Menu.Item key={item.name}>
+                          {({ active }) => (
+                            <a
+                              href={item.href}
+                              className={classNames(
+                                active ? 'bg-gray-100' : '',
+                                'block px-4 py-2 text-sm text-gray-700'
+                              )}
+                            >
+                              {item.name}
+                            </a>
+                          )}
+                        </Menu.Item>
+                      ))} */}
+                      <div className="flex flex-col items-start gap-3 px-4 py-2 text-sm text-gray-700">
+                      <button>dark mode</button>
+                      <Link href="/profile">Profile: {currentUser?.data?.name}</Link>
+                      <button onClick={handleLogout}>Logout</button>
+                      </div>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+                </>
+               }
               </div>
             </div>
           </div>

@@ -2,7 +2,6 @@ import Head from "next/head";
 import BooksCard from "../../components/BooksCard";
 
 export default function Books({data}) {
-    console.log(data)
     return (
     <>
     <Head>

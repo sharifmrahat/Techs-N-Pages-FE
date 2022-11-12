@@ -13,17 +13,52 @@
   }
   ```
 */
-import { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useState } from "react";
 import {
   Bars3Icon,
   ChevronLeftIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
+import Alert from "../../components/common/Alert";
+import { useRouter } from "next/router";
+import useCurrentUser from "../../hooks/useCurrentUser";
 
 export default function Signup() {
+  const [result, setResult] = useState([])
+  const [currentUser] = useCurrentUser()
+  
+  const router = useRouter()
+
+  const handleSignup = (e) => {
+    e.preventDefault()
+
+     const userInput = 
+    {
+      name : e.target.name.value,
+      email : e.target.email.value,
+      password: e.target.password.value,
+      confirmPassword: e.target.confirmPassword.value
+  }
+
+  const url = `https://techs-n-pages.onrender.com/api/v1/user/signup`
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userInput)
+    })
+    .then(res => res.json())
+    .then(data => setResult(data))
+  }
+
+useEffect(()=> {
+  if(result?.success || currentUser.data){
+    router.push('/')
+  }
+}, [result, currentUser, router])
+
   return (
     <div className=" bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200 font-primary">
       <div className="mx-auto max-w-7xl pt-10 lg:pt-20 pb-28">
@@ -66,7 +101,12 @@ export default function Signup() {
                 <div className="bg-slate-200 dark:bg-slate-800 sm:mx-auto sm:w-full sm:max-w-md sm:overflow-hidden rounded-md mx-5 lg:mx-0 shadow-md py-2">
                   <div className="p-5">
                     <div>
-                      <form action="#" method="POST" className="space-y-6">
+                      <form onSubmit={handleSignup} className="space-y-6">
+                        <div className={`${!result?.error ? 'hidden' : 'block'}`}>
+                          {
+                            !result?.success && <Alert message={result?.error} />
+                          }
+                        </div>
                       <div>
                           <label
                             htmlFor="name"
@@ -122,7 +162,7 @@ export default function Signup() {
                           </label>
                           <input
                             id="confirm-password"
-                            name="confirm-password"
+                            name="confirmPassword"
                             type="password"
                             placeholder="Re-enter Password"
                             className="block w-full rounded-md  py-3 px-4 bg-slate-300 dark:bg-gray-700 shadow-sm focus:outline-none"

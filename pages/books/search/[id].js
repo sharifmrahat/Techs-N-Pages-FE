@@ -19,7 +19,6 @@ import Spinner from "../../../components/common/Spinner";
         .then(data => setBooks(data))
     },[pageNo, bookName])
 
-    console.log(books)
     const remaining = pageNo === Math.ceil(books.total/10) ? books.total - ((pageNo -1)*10) : 10
   return (
     <div className="bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200">
