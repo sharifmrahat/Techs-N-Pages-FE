@@ -18,6 +18,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Combobox } from "@headlessui/react";
 import {
   ArrowRightIcon,
+  ArrowRightOnRectangleIcon,
   CheckIcon,
   ChevronUpDownIcon,
   MagnifyingGlassIcon,
@@ -27,6 +28,11 @@ import {
   XMarkIcon,
   SunIcon,
   MoonIcon,
+  ViewColumnsIcon,
+  ShoppingBagIcon,
+  StarIcon,
+  Cog8ToothIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import useDarkMode from "../hooks/useDarkMode";
@@ -36,12 +42,18 @@ import logo from "../images/logo.png";
 import useCurrentUser from "../hooks/useCurrentUser";
 
 const menuLink = [
-  {id: 1, name: 'Home', link: '/#'},
-  {id: 2, name: 'Books', link: '/books#'},
-  {id: 3, name: 'Articles', link: '/articles#'},
-  {id: 4, name: 'Contact', link: '/contact#'}
+  {id: 1, name: 'Home', link: '/'},
+  {id: 2, name: 'Books', link: '/books'},
+  {id: 3, name: 'Articles', link: '/articles'},
+  {id: 4, name: 'Contact', link: '/contact'}
 ]
 
+const userLink = [
+  {id: 1, name: 'Dashboard', link: '/dashboard', icon: <ViewColumnsIcon className="w-5 h-5 mr-2"></ViewColumnsIcon>},
+  {id: 2, name: 'My Bag', link: '/dashboard/cart', icon: <ShoppingBagIcon className="w-5 h-5 mr-2"></ShoppingBagIcon>},
+  {id: 3, name: 'Reviews', link: '/dashboard/reviews', icon: <StarIcon className="w-5 h-5 mr-2"></StarIcon>},
+  {id: 4, name: 'Profile', link: '/dashboard/profile', icon: <UserCircleIcon className="w-5 h-5 mr-2"></UserCircleIcon>},
+]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -253,12 +265,76 @@ export default function Menubar() {
                 )}
               </div>
               <div className="px-3 block lg:hidden">
-              <Link
+              {
+                !currentUser?.success ?  <>
+                 <Link
                       href="/login"
                       className={`block border border-transparent py-1 px-2 rounded text-base bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 ml-1`}
                     >
                       Login
                     </Link>
+                </> : <>
+                <Menu as="div" className="relative ml-3">
+                  <div>
+                    <Menu.Button className="flex max-w-xs items-center rounded-full text-sm focus:outline-none ">
+                      <span className="sr-only">Open user menu</span>
+                      {
+                        !currentUser?.image ? <>
+                        <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-slate-800 dark:bg-slate-300">
+    <svg className="h-full w-full text-slate-300  dark:text-slate-800" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+  </span>
+                        </> : <>
+                        <img className="h-8 w-8 rounded-full" src={currentUser?.data?.imageUrl} alt="" />
+                        </>
+                      }
+                     
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-200"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg focus:outline-none bg-white dark:bg-slate-700">
+                      <Menu.Item>
+                          {({ active }) => (
+                          <>
+                             {
+                              userLink.map(items => {
+                                return  <Link
+                                key={items.id}
+                                href={items.link}
+                                  className={classNames(
+                                    active ? 'bg-indigo-600 text-slate-100' : '',
+                                    'flex justify-start items-center px-4 py-2 text-sm hover:text-slate-100 hover:bg-indigo-600'
+                                  )}
+                                >
+                                  <span>{items?.icon || ''}</span>
+                                  {items.name}
+                                </Link>
+                              })
+                             }
+                             <button className="flex justify-center items-center w-full px-4 py-2 text-sm hover:bg-red-700 hover:text-slate-100"
+ onClick={handleLogout}>
+ <ArrowRightOnRectangleIcon className="w-5 h-5 mr-2" />
+                            <span>Logout</span>
+                             </button>
+                            
+                          </>
+                          )}
+                        </Menu.Item>
+      
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+                </>
+               }
               </div>
               <div className="flex lg:hidden">
                 {/* Mobile menu button */}
@@ -306,7 +382,7 @@ export default function Menubar() {
                       <span className="sr-only">Open user menu</span>
                       {
                         !currentUser?.image ? <>
-                        <span className="inline-block h-10 w-10 overflow-hidden rounded-full bg-slate-800 dark:bg-slate-300">
+                        <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-slate-800 dark:bg-slate-300">
     <svg className="h-full w-full text-slate-300  dark:text-slate-800" fill="currentColor" viewBox="0 0 24 24">
       <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
     </svg>
@@ -327,27 +403,35 @@ export default function Menubar() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg focus:outline-none">
-                      {/* {userNavigation.map((item) => (
-                        <Menu.Item key={item.name}>
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg focus:outline-none bg-white dark:bg-slate-700">
+                      <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
-                            >
-                              {item.name}
-                            </a>
+                          <>
+                             {
+                              userLink.map(items => {
+                                return  <Link
+                                key={items.id}
+                                href={items.link}
+                                  className={classNames(
+                                    active ? 'bg-indigo-600 text-slate-100' : '',
+                                    'flex justify-start items-center px-4 py-2 text-sm hover:text-slate-100 hover:bg-indigo-600'
+                                  )}
+                                >
+                                  <span>{items?.icon || ''}</span>
+                                  {items.name}
+                                </Link>
+                              })
+                             }
+                             <button className="flex justify-center items-center w-full px-4 py-2 text-sm hover:bg-red-700 hover:text-slate-100"
+ onClick={handleLogout}>
+ <ArrowRightOnRectangleIcon className="w-5 h-5 mr-2" />
+                            <span>Logout</span>
+                             </button>
+                            
+                          </>
                           )}
                         </Menu.Item>
-                      ))} */}
-                      <div className="flex flex-col items-start gap-3 px-4 py-2 text-sm text-gray-700">
-                      <button>dark mode</button>
-                      <Link href="/profile">Profile: {currentUser?.data?.name}</Link>
-                      <button onClick={handleLogout}>Logout</button>
-                      </div>
+      
                     </Menu.Items>
                   </Transition>
                 </Menu>
