@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import useCurrentUser from "../hooks/useCurrentUser"
 
 /*
@@ -17,14 +18,65 @@ import useCurrentUser from "../hooks/useCurrentUser"
 export default function UpdateProfile() {
     const [currentUser] = useCurrentUser()
 
-    const handleUpdate = () => {
-            console.log("updated")
+    let [profileInput, setProfileInput] = useState({
+        name: currentUser.data?.name,
+        email: currentUser.data?.email,
+    })
+
+    const handleInputs = (e) => {
+        const inputName = e.target.name.value 
+        const inputEmail = e.target.email?.value 
+        setProfileInput({
+            name: inputName,
+            email: inputEmail
+        })
     }
+
+    const handleUpdate = (e) => {
+        e.preventDefault()
+
+       const updateData = {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            currentPassword: e.target.currentPassword.value,
+            newPassword: e.target.newPassword.value,
+            confirmNewPassword: e.target.confirmNewPassword.value,
+        }
+
+        const url = `https://techs-n-pages.onrender.com/api/v1/user/update`
+        fetch(url, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+            body: JSON.stringify(updateData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if(data?.data?.modifiedCount){
+                    alert("Update Success")
+                }
+            })
+
+    }
+
+    useEffect(()=> {
+        setProfileInput({
+            name: currentUser.data?.name,
+            email: currentUser.data?.email,
+        })
+    }, [currentUser])
+
+
+    console.log(currentUser)
+
     return (
      <>
              <div className="m-5 lg:m-10 mx-auto lg:mx-auto w-max lg:w-1/2 bg-slate-200 dark:bg-slate-800  rounded-md shadow-md p-5 font-primary text-slate-900 dark:text-slate-200">
                     <div>
-                      <form onSubmit={handleUpdate} className="space-y-6">
+                      <form onSubmit={handleUpdate} onChange={handleInputs}  className="space-y-6">
                         {/* <div className={`${!result?.error ? 'hidden' : 'block'}`}>
                           {
                             !result?.success && <Alert message={result?.error} />
@@ -41,7 +93,7 @@ export default function UpdateProfile() {
                             type="text"
                             name="name"
                             id="name"
-                            value={currentUser?.data?.name}
+                            value={profileInput.name}
                             placeholder="Enter your full name"
                             className="block w-full rounded-md  py-3 px-4 bg-slate-300 dark:bg-gray-700 shadow-sm focus:outline-none"
                           />
@@ -54,10 +106,11 @@ export default function UpdateProfile() {
                             Email
                           </label>
                           <input
+                          disabled={true}
                             type="email"
                             name="email"
                             id="email"
-                            value={currentUser?.data?.email}
+                            value={profileInput.email}
                             placeholder="Enter your email"
                             className="block w-full rounded-md  py-3 px-4 bg-slate-300 dark:bg-gray-700 shadow-sm focus:outline-none"
                           />
@@ -102,7 +155,7 @@ export default function UpdateProfile() {
                           </label>
                           <input
                             id="confirm-password"
-                            name="confirmPassword"
+                            name="confirmNewPassword"
                             type="password"
                             placeholder="Re-enter Password"
                             className="block w-full rounded-md  py-3 px-4 bg-slate-300 dark:bg-gray-700 shadow-sm focus:outline-none"
