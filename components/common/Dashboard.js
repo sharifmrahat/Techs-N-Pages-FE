@@ -17,13 +17,14 @@ import {
   UserCircleIcon
 } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
+import DataTable from './DataTable'
 
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Dashboard({routeName, component}) {
+export default function Dashboard({component}) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const route = useRouter()
@@ -47,7 +48,7 @@ export default function Dashboard({routeName, component}) {
         <body class="h-full">
         ```
       */}
-      <div className='mb-52'>
+      <div className='pb-52 font-primary bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200'>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-40 md:hidden" onClose={setSidebarOpen}>
             <Transition.Child
@@ -159,24 +160,11 @@ export default function Dashboard({routeName, component}) {
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <main className="flex-1">
+          <main className="flex-1 mb-96">
            {
             <div className="py-6">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-              <h1 className="text-2xl font-semibold text-gray-900">{routeName}</h1>
-            </div>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-              {/* Replace with your content */}
-              {component}
-              <div className="py-4">
-                <div className="h-96 rounded-lg border-4 border-dashed border-gray-200">
-
-                {component}
-                </div>
-                
-              </div>
-              {/* /End replace */}
-            </div>
+            
+            {component}
           </div>
            }
           </main>

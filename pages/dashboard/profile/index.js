@@ -1,9 +1,9 @@
 import Dashboard from "../../../components/common/Dashboard";
-import DataTable from "../../../components/common/DataTable";
+import UpdateProfile from "../../../components/UpdateProfile";
 
 function index() {
 
-  const component = <DataTable routeName="My Bag"></DataTable>
+  const component = <UpdateProfile></UpdateProfile>
   
     return (
         <>

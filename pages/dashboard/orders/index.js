@@ -3,7 +3,7 @@ import DataTable from "../../../components/common/DataTable";
 
 function index() {
 
-  const component = <DataTable routeName="My Bag"></DataTable>
+  const component = <DataTable routeName="Manage Orders Orders"></DataTable>
   
     return (
         <>
