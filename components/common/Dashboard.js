@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -18,6 +18,9 @@ import {
 } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
 import DataTable from './DataTable'
+import useCurrentUser from '../../hooks/useCurrentUser'
+import Spinner from './Spinner'
+import Link from 'next/link'
 
 
 function classNames(...classes) {
@@ -26,6 +29,7 @@ function classNames(...classes) {
 
 export default function Dashboard({component}) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [currentUser] = useCurrentUser()
 
   const route = useRouter()
 
@@ -98,7 +102,7 @@ export default function Dashboard({component}) {
                    
                     <nav className="mt-5 space-y-1 px-2">
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
                           href={item.href}
                           className={classNames(
@@ -110,7 +114,7 @@ export default function Dashboard({component}) {
                         >
                           <item.icon className="mr-4 h-6 w-6 flex-shrink-0 text-indigo-300" aria-hidden="true" />
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </nav>
                   </div>
@@ -132,7 +136,7 @@ export default function Dashboard({component}) {
               
               <nav className="mt-5 flex-1 space-y-1 px-2">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     className={classNames(
@@ -142,7 +146,7 @@ export default function Dashboard({component}) {
                   >
                     <item.icon className="mr-3 h-6 w-6 flex-shrink-0 text-indigo-300" aria-hidden="true" />
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </div>
@@ -164,7 +168,13 @@ export default function Dashboard({component}) {
            {
             <div className="py-6">
             
+           {
+            !component ? <>
+            <Spinner></Spinner>
+            </> : <>
             {component}
+            </>
+           }
           </div>
            }
           </main>
