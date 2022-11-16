@@ -18,6 +18,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Alert from '../../components/common/Alert'
+import Spinner from '../../components/common/Spinner'
 import useCurrentUser from '../../hooks/useCurrentUser'
 
 export default function Login() {
@@ -62,12 +63,15 @@ useEffect(()=> {
   }
 }, [currentUser, router])
 
-
-
-
-
   return (
-    <div className=" bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200 font-primary">
+   <>
+   {
+    currentUser.length === 0 ? <>
+    <Spinner></Spinner>
+    </> : <>
+    {
+     !currentUser.success ? <>
+     <div className=" bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200 font-primary">
       
       <div className="mx-auto max-w-7xl pt-10 lg:pt-20 pb-28">
         <main>
@@ -166,5 +170,13 @@ useEffect(()=> {
         </main>
       </div>
     </div>
+     </> : <>
+     <Spinner></Spinner>
+     </>
+    }
+    </>
+
+   }
+   </>
   )
 }

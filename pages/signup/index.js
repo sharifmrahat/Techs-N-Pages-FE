@@ -23,6 +23,7 @@ import Link from "next/link";
 import Alert from "../../components/common/Alert";
 import { useRouter } from "next/router";
 import useCurrentUser from "../../hooks/useCurrentUser";
+import Spinner from "../../components/common/Spinner";
 
 export default function Signup() {
   const [result, setResult] = useState([])
@@ -63,7 +64,14 @@ export default function Signup() {
   }, [currentUser, router])
 
   return (
-    <div className=" bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200 font-primary">
+    <>
+   {
+    currentUser.length === 0 ? <>
+    <Spinner></Spinner>
+    </> : <>
+    {
+     !currentUser.success ? <>
+     <div className=" bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200 font-primary">
       <div className="mx-auto max-w-7xl pt-10 lg:pt-20 pb-28">
         <main>
           <div className="mx-auto">
@@ -216,5 +224,13 @@ export default function Signup() {
         </main>
       </div>
     </div>
+     </> : <>
+     <Spinner></Spinner>
+     </>
+    }
+    </>
+
+   }
+   </>
   );
 }

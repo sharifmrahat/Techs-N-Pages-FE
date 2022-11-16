@@ -40,6 +40,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import logo from "../images/logo.png";
 import useCurrentUser from "../hooks/useCurrentUser";
+import Spinner from "./common/Spinner";
 
 const menuLink = [
   {id: 1, name: 'Home', link: '/'},
@@ -90,7 +91,7 @@ export default function Menubar() {
     setCurrentUser({success: false})
   }
 
-
+console.log(currentUser)
 
   return (
     <Disclosure
@@ -268,14 +269,15 @@ export default function Menubar() {
               </div>
               <div className="px-3 block lg:hidden">
               {
-                !currentUser?.success ?  <>
-                 <Link
-                      href="/login"
-                      className={`block border border-transparent py-1 px-2 rounded text-base bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 ml-1`}
-                    >
-                      Login
-                    </Link>
-                </> : <>
+                currentUser.length === 0 ?  <>
+                 <Spinner type="clip"></Spinner>
+                </> : 
+                !currentUser.success ? <Link
+                href="/login"
+                className={`block border border-transparent py-1 px-2 rounded text-base bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 ml-1`}
+              >
+                Login
+              </Link> : <>
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex max-w-xs items-center rounded-full text-sm focus:outline-none ">
@@ -369,15 +371,16 @@ export default function Menubar() {
                 )}
               </div>
               <div className="hidden lg:ml-5 lg:block">
-               {
-                !currentUser?.success ?  <>
-                 <Link
-                      href="/login"
-                      className={`block border border-transparent py-1 px-4 rounded text-base bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 ml-4`}
-                    >
-                      Login
-                    </Link>
-                </> : <>
+              {
+                currentUser.length === 0 ?  <>
+                 <Spinner type="clip"></Spinner>
+                </> : 
+                !currentUser.success ? <Link
+                href="/login"
+                className={`block border border-transparent py-1 px-2 rounded text-base bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 ml-1`}
+              >
+                Login
+              </Link> : <>
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="flex max-w-xs items-center rounded-full text-sm focus:outline-none ">
