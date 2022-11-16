@@ -52,7 +52,6 @@ const menuLink = [
 const userLink = [
   {id: 1, name: 'Dashboard', link: '/dashboard', icon: <ViewColumnsIcon className="w-5 h-5 mr-2"></ViewColumnsIcon>},
   {id: 2, name: 'My Bag', link: '/dashboard/bag', icon: <ShoppingBagIcon className="w-5 h-5 mr-2"></ShoppingBagIcon>},
-  {id: 3, name: 'Reviews', link: '/dashboard/reviews', icon: <StarIcon className="w-5 h-5 mr-2"></StarIcon>},
   {id: 4, name: 'Profile', link: '/dashboard/profile', icon: <UserCircleIcon className="w-5 h-5 mr-2"></UserCircleIcon>},
 ]
 
