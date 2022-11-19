@@ -54,7 +54,6 @@ export default function UpdateProfile() {
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if(data?.data?.modifiedCount){
                     alert("Update Success")
                 }
@@ -68,9 +67,6 @@ export default function UpdateProfile() {
             email: currentUser.data?.email,
         })
     }, [currentUser])
-
-
-    console.log(currentUser)
 
     return (
      <>

@@ -29,30 +29,36 @@ function classNames(...classes) {
 
 export default function Dashboard({component}) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [currentUser] = useCurrentUser()
+  const [currentUser, refetch, setRefetch, loading, error] = useCurrentUser();
 
-  const route = useRouter()
+  const router = useRouter()
 
   const navigation = [
-    { id: 1, name: 'Dashboard', href: '/dashboard', icon: ViewColumnsIcon, current: route.pathname === '/dashboard' ? true : false },
-    { id: 2, name: 'My Bag', href: '/dashboard/bag', icon: ShoppingBagIcon, current: route.pathname === '/dashboard/bag' ? true : false },
-    { id: 3, name: 'Reviews', href: '/dashboard/reviews', icon: StarIcon, current: route.pathname === '/dashboard/reviews' ? true : false },
-    { id: 4, name: 'Manage Users', href: '/dashboard/users', icon: UsersIcon, current: route.pathname === '/dashboard/users' ? true : false },
-    { id: 5, name: 'Manage Orders', href: '/dashboard/orders', icon: ChartBarIcon, current: route.pathname === '/dashboard/orders' ? true : false },
-    { id: 6, name: 'Profile', href: '/dashboard/profile', icon: UserCircleIcon, current: route.pathname === '/dashboard/profile' ? true : false },
+    { id: 1, name: 'Dashboard', href: '/dashboard', icon: ViewColumnsIcon, current: router.pathname === '/dashboard' ? true : false },
+    { id: 2, name: 'My Bag', href: '/dashboard/bag', icon: ShoppingBagIcon, current: router.pathname === '/dashboard/bag' ? true : false },
+    { id: 3, name: 'Reviews', href: '/dashboard/reviews', icon: StarIcon, current: router.pathname === '/dashboard/reviews' ? true : false },
+    { id: 4, name: 'Manage Users', href: '/dashboard/users', icon: UsersIcon, current: router.pathname === '/dashboard/users' ? true : false },
+    { id: 5, name: 'Manage Orders', href: '/dashboard/orders', icon: ChartBarIcon, current: router.pathname === '/dashboard/orders' ? true : false },
+    { id: 6, name: 'Profile', href: '/dashboard/profile', icon: UserCircleIcon, current: router.pathname === '/dashboard/profile' ? true : false },
   ]
+
+  useEffect(() => {
+    if (currentUser.length === 0) {
+      setRefetch(true);
+    }
+    if (!currentUser.success) {
+      router.push("/");
+    }
+  }, [currentUser, router, setRefetch, refetch]);
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
-      <div className='pb-52 font-primary bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200'>
+     {
+      currentUser.length === 0 || !currentUser.success ? <>
+      <Spinner></Spinner>
+      </> : <>
+      {
+          <div className='pb-52 font-primary bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200'>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-40 md:hidden" onClose={setSidebarOpen}>
             <Transition.Child
@@ -180,6 +186,9 @@ export default function Dashboard({component}) {
           </main>
         </div>
       </div>
+      }
+      </>
+     }
     </>
   )
 }

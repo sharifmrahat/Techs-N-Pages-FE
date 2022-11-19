@@ -1,52 +1,25 @@
-import '../styles/globals.css'
-import Head from 'next/head'
-import Menubar from '../components/Menubar'
-import Footer from '../components/Footer'
-import Spinner from '../components/common/Spinner'
-import { useEffect, useState } from 'react'
+import "../styles/globals.css";
+import Head from "next/head";
+import Menubar from "../components/Menubar";
+import Footer from "../components/Footer";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function MyApp({ Component, pageProps }) {
-  // const [loading, setLoading] = useState(false)
- 
-  // useEffect(()=> {
-  // //   if (typeof window !== 'undefined') {
-  // //     setLoading(window.onload)
-  // // }
-
-  // setTimeout(() => {
-  //   setLoading(true)
-  //  }, 2000);
-
-  // }, [])
-
-  
-
-  return <>
- 
-  <Head>
-  <title>Techs N Pages | Technology Books App</title>
-  <meta name="description" content="Tech Books Web App" />
-  <link rel="icon" href="/favicon.ico" />
-</Head>
-<Menubar></Menubar>
-        <Component {...pageProps}/>
-        <Footer></Footer>
-  {/* {
-    !loading ? <>
-    <div className="mx-auto h-screen w-full py-28  bg-white dark:bg-slate-700">
-      <Spinner type='climb'></Spinner>
-      </div>
-    </> : <>
-    
+  const queryClient = new QueryClient();
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <Head>
+          <title>Techs N Pages | Technology Books App</title>
+          <meta name="description" content="Tech Books Web App" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
         <Menubar></Menubar>
-        <Component {...pageProps}/>
+        <Component {...pageProps} />
         <Footer></Footer>
+      </QueryClientProvider>
     </>
-  } */}
- 
-
-      
-  </>
+  );
 }
 
-export default MyApp
+export default MyApp;
