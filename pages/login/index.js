@@ -64,10 +64,6 @@ export default function Login() {
     }
   }, [currentUser, router, setRefetch, refetch]);
 
-  if (loading) {
-    return <Spinner></Spinner>;
-  }
-
 
   return (
     <>
