@@ -47,7 +47,7 @@ export default function Dashboard({component}) {
       setRefetch(true);
     }
     if (!currentUser.success) {
-      router.push('/');
+      setRefetch(true);
     }
     else{
       router.push('/')
