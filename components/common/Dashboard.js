@@ -46,8 +46,8 @@ export default function Dashboard({component}) {
     if (currentUser.length === 0) {
       setRefetch(true);
     }
-    if (currentUser.success) {
-      router.push({pathname: router.pathname});
+    if (!currentUser.success) {
+      router.push('/');
     }
     else{
       router.push('/')
