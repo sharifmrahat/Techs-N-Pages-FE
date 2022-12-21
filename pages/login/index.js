@@ -59,10 +59,10 @@ export default function Login() {
     if (currentUser.length === 0) {
       setRefetch(true);
     }
-    if (currentUser.success) {
+    if (currentUser.success && router.pathname === '/login') {
       router.push("/");
     }
-  }, [currentUser, router, setRefetch, refetch]);
+  }, [currentUser]);
 
 
   return (

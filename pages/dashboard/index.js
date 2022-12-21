@@ -1,4 +1,5 @@
 import Dashboard from "../../components/common/Dashboard";
+import withAuth from "../../components/common/WithAuth";
 
 function index() {
   return (
@@ -9,4 +10,4 @@ function index() {
 }
 
 
-export default index;
+export default index

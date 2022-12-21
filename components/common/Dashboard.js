@@ -21,13 +21,14 @@ import DataTable from './DataTable'
 import useCurrentUser from '../../hooks/useCurrentUser'
 import Spinner from './Spinner'
 import Link from 'next/link'
+import withAuth from './WithAuth'
 
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Dashboard({component}) {
+function Dashboard({component}) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [currentUser, refetch, setRefetch, loading, error] = useCurrentUser();
 
@@ -42,26 +43,21 @@ export default function Dashboard({component}) {
     { id: 6, name: 'Profile', href: '/dashboard/profile', icon: UserCircleIcon, current: router.pathname === '/dashboard/profile' ? true : false },
   ]
 
-  useEffect(() => {
-    if (currentUser.length === 0) {
-      setRefetch(true);
-    }
-    if (!currentUser.success) {
-      setRefetch(true);
-    }
-    else{
-      router.push('/')
-    }
-  }, [currentUser, router, setRefetch, refetch]);
+  // useEffect(() => {
+  //   if (currentUser.length === 0) {
+  //     setRefetch(true);
+  //   }
+  //   if (!currentUser.success) {
+  //     setRefetch(true);
+  //   }
+  //   else{
+  //     router.push('/')
+  //   }
+  // }, [currentUser, router, setRefetch, refetch]);
 
   return (
     <>
-     {
-      currentUser.length === 0 || !currentUser.success ? <>
-      <Spinner></Spinner>
-      </> : <>
-      {
-          <div className='pb-52 font-primary bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200'>
+       <div className='pb-52 font-primary bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200'>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-40 md:hidden" onClose={setSidebarOpen}>
             <Transition.Child
@@ -176,22 +172,13 @@ export default function Dashboard({component}) {
           <main className="flex-1 mb-96">
            {
             <div className="py-6">
-            
-           {
-            !component ? <>
-            <Spinner></Spinner>
-            </> : <>
             {component}
-            </>
-           }
           </div>
            }
           </main>
         </div>
       </div>
-      }
-      </>
-     }
     </>
   )
 }
+export default withAuth(Dashboard)

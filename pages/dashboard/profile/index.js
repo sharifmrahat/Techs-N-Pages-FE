@@ -3,6 +3,7 @@ import Dashboard from "../../../components/common/Dashboard";
 import UpdateProfile from "../../../components/UpdateProfile";
 import useCurrentUser from "../../../hooks/useCurrentUser";
 import { useEffect } from 'react'
+import withAuth from "../../../components/common/WithAuth";
 
 function Profile() {
   const [currentUser] = useCurrentUser()
