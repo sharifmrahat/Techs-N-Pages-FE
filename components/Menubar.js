@@ -109,10 +109,6 @@ export default function Menubar() {
       callRefetch();
     }
   }, [user, refetch, loading, callRefetch]);
-  
-  console.log(loading, 'loading')
-console.log(user, 'user')
-console.log(refetch, 'refetch')
 
   return (
     <Disclosure
@@ -193,7 +189,7 @@ console.log(refetch, 'refetch')
                             }`}
                           >
                             <p className="p-2  block w-full">
-                              No Books is Found about {query}
+                              No Books is Found about `{query}`
                             </p>
                           </Combobox.Options>
                         ) : (
@@ -271,10 +267,10 @@ console.log(refetch, 'refetch')
                                   <span className="font-bold">
                                     {data?.total}
                                   </span>{" "}
-                                  books on{" "}
-                                  {query?.length > 12
-                                    ? query.slice(0, 12) + "..."
-                                    : query}
+                                  books related to {" "}
+                                  `{query?.length > 10
+                                    ? query.slice(0, 10) + "..."
+                                    : query}`
                                 </p>
 
                                 <ArrowRightIcon className="w-4 h-4"></ArrowRightIcon>
@@ -551,7 +547,7 @@ console.log(refetch, 'refetch')
                             }`}
                           >
                             <p className="p-2  block w-full">
-                              No Books is Found about {query}
+                              No Books is Found about `{query}`
                             </p>
                           </Combobox.Options>
                         ) : (
@@ -629,10 +625,10 @@ console.log(refetch, 'refetch')
                                   <span className="font-bold">
                                     {data?.total}
                                   </span>{" "}
-                                  books on{" "}
-                                  {query?.length > 12
-                                    ? query.slice(0, 12) + "..."
-                                    : query}
+                                  books related to{" "}
+                                  `{query?.length > 10
+                                    ? query.slice(0, 10) + "..."
+                                    : query}`
                                 </p>
 
                                 <ArrowRightIcon className="w-4 h-4"></ArrowRightIcon>
