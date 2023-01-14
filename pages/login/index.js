@@ -16,16 +16,17 @@
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Alert from "../../components/common/Alert";
 import Spinner from "../../components/common/Spinner";
-import useCurrentUser from "../../hooks/useCurrentUser";
+import { AuthContext } from '../../context/AuthProvider'
 
 export default function Login() {
   const [result, setResult] = useState([]);
-  const [currentUser, refetch, setRefetch, loading, error] = useCurrentUser();
-
+  const { user, logout, loading } = useContext(AuthContext)
   const router = useRouter();
+
+  const from = router.query.from || '/'
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -49,27 +50,24 @@ export default function Login() {
           setResult(data);
           if (data.token) {
             localStorage.setItem("accessToken", data?.token);
-            router.push("/");
+            router.push(from);
           }
         }
       });
   };
 
   useEffect(() => {
-    if (currentUser.length === 0) {
-      setRefetch(true);
+    if (user) {
+      router.push(from);
     }
-    if (currentUser.success && router.pathname === '/login') {
-      router.push("/");
-    }
-  }, [currentUser]);
+  }, [user, router, from]);
 
 
   return (
     <>
-      {currentUser.length === 0 || currentUser.success ? (
+      {loading ? (
         <>
-          <Spinner></Spinner>
+         <Spinner></Spinner>
         </>
       ) : (
         <>
