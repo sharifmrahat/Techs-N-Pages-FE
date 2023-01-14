@@ -23,7 +23,7 @@ import { AuthContext } from '../../context/AuthProvider'
 
 export default function Login() {
   const [result, setResult] = useState([]);
-  const { user, logout, loading } = useContext(AuthContext)
+  const { user, loading } = useContext(AuthContext)
   const router = useRouter();
 
   const from = router.query.from || '/'
@@ -65,7 +65,7 @@ export default function Login() {
 
   return (
     <>
-      {loading ? (
+      {(loading && !user) || loading || user ? (
         <>
          <Spinner></Spinner>
         </>

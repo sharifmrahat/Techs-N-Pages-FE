@@ -13,7 +13,7 @@
   }
   ```
 */
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import {
   Bars3Icon,
   ChevronLeftIcon,
@@ -22,14 +22,15 @@ import {
 import Link from "next/link";
 import Alert from "../../components/common/Alert";
 import { useRouter } from "next/router";
-import useCurrentUser from "../../hooks/useCurrentUser";
 import Spinner from "../../components/common/Spinner";
+import { AuthContext } from '../../context/AuthProvider'
 
 export default function Signup() {
   const [result, setResult] = useState([]);
-  const [currentUser, refetch, setRefetch] = useCurrentUser();
+  const { user, loading } = useContext(AuthContext)
 
   const router = useRouter();
+  const from = router.query.from || '/'
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -40,6 +41,11 @@ export default function Signup() {
       password: e.target.password.value,
       confirmPassword: e.target.confirmPassword.value,
     };
+
+    const loginInput = {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    }
 
     const url = `https://techs-n-pages.onrender.com/api/v1/user/signup`;
     fetch(url, {
@@ -53,23 +59,36 @@ export default function Signup() {
       .then((data) => {
         setResult(data);
         if (data.success) {
-          router.push("/login");
+          const loginUrl = `https://techs-n-pages.onrender.com/api/v1/user/login`;
+          fetch(loginUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(loginInput),
+          }) .then((res) => res.json())
+          .then((data) => {
+            if (data) {
+              setResult(data);
+              if (data.token) {
+                localStorage.setItem("accessToken", data?.token);
+                router.push(from);
+              }
+            }
+          });
         }
       });
   };
 
   useEffect(() => {
-    if (currentUser.length === 0) {
-      setRefetch(true);
+    if (user) {
+      router.push(from);
     }
-    if (currentUser.success) {
-      router.push("/");
-    }
-  }, [currentUser, router, setRefetch, refetch]);
+  }, [user, router, from]);
 
   return (
     <>
-      {currentUser.length === 0 || currentUser.success ? (
+      {(loading && !user) || loading || user ? (
         <>
           <Spinner></Spinner>
         </>

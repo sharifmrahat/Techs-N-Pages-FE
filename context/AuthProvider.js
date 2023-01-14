@@ -4,24 +4,27 @@ export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
-    const [userEmail, setUserEmail] = useState('');
+    // const [userEmail, setUserEmail] = useState('');
     const [token, setToken] = useState('');
     const [loading, setLoading] = useState(false)
+    const [refetch, setRefetch] = useState(false)
 
     const logout = () => {
         localStorage.removeItem('accessToken');
         setUser(null);
-        setUserEmail('');
+        // setUserEmail('');
         setToken('');
+        setRefetch(false)
     }
 
     useEffect(() => {
         setToken(localStorage.getItem('accessToken'))
-    }, [userEmail])
+    }, [refetch])
 
     useEffect(() => {
         const url = `https://techs-n-pages.onrender.com/api/v1/user/currentUser`;
         if (token) {
+            setRefetch(true)
             setLoading(true)
             fetch(url, {
                 method: "GET",
@@ -41,12 +44,16 @@ export default function AuthProvider({ children }) {
                     setUser();
                 })
         }
-    }, [token])
+        else{
+            setLoading(false)
+        }
+    }, [token, refetch])
 
     const authInfo = {
         user,
         setUser,
-        setUserEmail,
+        refetch, 
+        setRefetch,
         logout,
         loading
     }

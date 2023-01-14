@@ -13,7 +13,7 @@
   }
   ```
 */
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Combobox } from "@headlessui/react";
 import {
@@ -39,7 +39,7 @@ import useDarkMode from "../hooks/useDarkMode";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import logo from "../images/logo.png";
-import useCurrentUser from "../hooks/useCurrentUser";
+import { AuthContext } from "../context/AuthProvider";
 import Spinner from "./common/Spinner";
 
 const menuLink = [
@@ -75,7 +75,7 @@ function classNames(...classes) {
 }
 
 export default function Menubar() {
-  const [currentUser, refetch, setRefetch, loading, error] = useCurrentUser();
+  const { user, loading, logout, refetch, setRefetch  } = useContext(AuthContext)
   const [colorTheme, setTheme] = useDarkMode();
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState([]);
@@ -101,15 +101,16 @@ export default function Menubar() {
   }, [query]);
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    setRefetch(false);
+    logout()
   };
 
   useEffect(() => {
-    if (currentUser.success) {
+    if (!user || !loading) {
       setRefetch(true);
     }
-  }, [currentUser, refetch, setRefetch]);
+  }, [user, refetch, loading, setRefetch]);
+  
+
 
   return (
     <Disclosure
@@ -304,16 +305,16 @@ export default function Menubar() {
                 )}
               </div>
               <div className="px-3 block lg:hidden">
-                {!currentUser?.success ? (
-                  <Link
+                {loading ? (
+                  <Spinner type="clip"></Spinner>
+                ) : !user? (
+                  <>
+                     <Link
                     href="/login"
                     className={`block border border-transparent py-1 px-2 rounded text-base bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 ml-1`}
                   >
                     Login
                   </Link>
-                ) : loading === true ? (
-                  <>
-                    <Spinner type="clip"></Spinner>
                   </>
                 ) : (
                   <>
@@ -321,7 +322,7 @@ export default function Menubar() {
                       <div>
                         <Menu.Button className="flex max-w-xs items-center rounded-full text-sm focus:outline-none ">
                           <span className="sr-only">Open user menu</span>
-                          {!currentUser?.image ? (
+                          {!user?.imageUrl ? (
                             <>
                               <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-slate-800 dark:bg-slate-300">
                                 <svg
@@ -337,7 +338,7 @@ export default function Menubar() {
                             <>
                               <img
                                 className="h-8 w-8 rounded-full"
-                                src={currentUser?.data?.imageUrl}
+                                src={user?.imageUrl}
                                 alt=""
                               />
                             </>
@@ -421,24 +422,23 @@ export default function Menubar() {
                 )}
               </div>
               <div className="hidden lg:ml-5 lg:block">
-                {!currentUser?.success ? (
-                  <Link
-                    href="/login"
-                    className={`block border border-transparent py-1 px-2 rounded text-base bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 ml-1`}
-                  >
-                    Login
-                  </Link>
-                ) : loading === "true" ? (
-                  <>
+                {loading ? (<>
                     <Spinner type="clip"></Spinner>
                   </>
+                ) : !user ? (
+                  <Link
+                  href="/login"
+                  className={`block border border-transparent py-1 px-2 rounded text-base bg-indigo-600 dark:bg-indigo-500 text-slate-100 dark:text-slate-50 ml-1`}
+                >
+                  Login
+                </Link>
                 ) : (
                   <>
                     <Menu as="div" className="relative ml-3">
                       <div>
                         <Menu.Button className="flex max-w-xs items-center rounded-full text-sm focus:outline-none ">
                           <span className="sr-only">Open user menu</span>
-                          {!currentUser?.image ? (
+                          {!user?.imageUrl ? (
                             <>
                               <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-slate-800 dark:bg-slate-300">
                                 <svg
@@ -454,7 +454,7 @@ export default function Menubar() {
                             <>
                               <img
                                 className="h-8 w-8 rounded-full"
-                                src={currentUser?.data?.imageUrl}
+                                src={user?.imageUrl}
                                 alt=""
                               />
                             </>
