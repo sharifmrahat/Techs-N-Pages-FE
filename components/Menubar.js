@@ -75,7 +75,7 @@ function classNames(...classes) {
 }
 
 export default function Menubar() {
-  const { user, loading, logout, refetch, setRefetch  } = useContext(AuthContext)
+  const { user, loading, logout, refetch, callRefetch  } = useContext(AuthContext)
   const [colorTheme, setTheme] = useDarkMode();
   const [query, setQuery] = useState("");
   const [books, setBooks] = useState([]);
@@ -106,11 +106,13 @@ export default function Menubar() {
 
   useEffect(() => {
     if (!user || !loading) {
-      setRefetch(true);
+      callRefetch();
     }
-  }, [user, refetch, loading, setRefetch]);
+  }, [user, refetch, loading, callRefetch]);
   
-
+  console.log(loading, 'loading')
+console.log(user, 'user')
+console.log(refetch, 'refetch')
 
   return (
     <Disclosure

@@ -26,14 +26,17 @@ import Spinner from "../../components/common/Spinner";
 import { AuthContext } from '../../context/AuthProvider'
 
 export default function Signup() {
-  const [result, setResult] = useState([]);
   const { user, loading } = useContext(AuthContext)
+  const [submit, setSubmit] = useState(false)
+  const [result, setResult] = useState([]);
 
   const router = useRouter();
   const from = router.query.from || '/'
 
   const handleSignup = (e) => {
     e.preventDefault();
+    setResult([])
+    setSubmit(true)
 
     const userInput = {
       name: e.target.name.value,
@@ -73,9 +76,13 @@ export default function Signup() {
               if (data.token) {
                 localStorage.setItem("accessToken", data?.token);
                 router.push(from);
+                setSubmit(false)
               }
             }
           });
+        }
+        if(data.error){
+          setSubmit(false)
         }
       });
   };
@@ -212,12 +219,17 @@ export default function Signup() {
                                   </div>
 
                                   <div>
-                                    <button
+                                    {
+                                       submit ? 
+                                       <Spinner type="clip"></Spinner> 
+                                       : 
+                                      <button
                                       type="submit"
                                       className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 dark:bg-indigo-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                     >
                                       Sign Up
                                     </button>
+                                    }
                                   </div>
                                 </form>
                               </div>

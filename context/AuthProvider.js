@@ -17,13 +17,18 @@ export default function AuthProvider({ children }) {
         setRefetch(false)
     }
 
+    const callRefetch = () => {
+        setRefetch(true)
+        setToken(localStorage.getItem('accessToken'))
+    }
+
     useEffect(() => {
         setToken(localStorage.getItem('accessToken'))
     }, [refetch])
 
     useEffect(() => {
         const url = `https://techs-n-pages.onrender.com/api/v1/user/currentUser`;
-        if (token) {
+        if (token && refetch) {
             setRefetch(true)
             setLoading(true)
             fetch(url, {
@@ -54,6 +59,7 @@ export default function AuthProvider({ children }) {
         setUser,
         refetch, 
         setRefetch,
+        callRefetch,
         logout,
         loading
     }
