@@ -1,5 +1,6 @@
 import Dashboard from "../../../components/common/Dashboard";
 import DataTable from "../../../components/common/DataTable";
+import AdminRoute from "../../../context/AdminRoute";
 
 function index() {
 
@@ -13,4 +14,4 @@ function index() {
 }
 
 
-export default index;
+export default AdminRoute(index);

@@ -4,19 +4,19 @@ import Spinner from "../components/common/Spinner";
 import { AuthContext } from "./AuthProvider";
 import Error from "../pages/404";
 
-const PrivateRoute = (Component) => {
+const AdminRoute = (Component) => {
     const Auth = (props) => {
-    const { user, loading, setRefetch } = useContext(AuthContext)
-    
-      useEffect(() => {
+      const { user, loading, callRefetch } = useContext(AuthContext)
+
+          useEffect(() => {
     if (!user) {
-      setRefetch(true);
+        callRefetch(true);
     }
-  }, [user, setRefetch]);
+  }, [user, callRefetch]);
       if(loading){
         return <Spinner/>
       }
-      if (user) {
+      if (user?.role === 'admin') {
         return (
             <Component {...props} />
            
@@ -37,4 +37,4 @@ const PrivateRoute = (Component) => {
     return Auth;
   };
   
-  export default PrivateRoute;
+export default AdminRoute;
