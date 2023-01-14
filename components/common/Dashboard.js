@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -21,6 +21,7 @@ import DataTable from './DataTable'
 import Spinner from './Spinner'
 import Link from 'next/link'
 import PrivateRoute from '../../context/PrivateRoute'
+import { AuthContext } from '../../context/AuthProvider'
 
 
 function classNames(...classes) {
@@ -29,6 +30,7 @@ function classNames(...classes) {
 
 function Dashboard({component}) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { user, loading } = useContext(AuthContext)
 
   const router = useRouter()
 
@@ -36,10 +38,17 @@ function Dashboard({component}) {
     { id: 1, name: 'Dashboard', href: '/dashboard', icon: ViewColumnsIcon, current: router.pathname === '/dashboard' ? true : false },
     { id: 2, name: 'My Bag', href: '/dashboard/bag', icon: ShoppingBagIcon, current: router.pathname === '/dashboard/bag' ? true : false },
     { id: 3, name: 'Reviews', href: '/dashboard/reviews', icon: StarIcon, current: router.pathname === '/dashboard/reviews' ? true : false },
-    { id: 4, name: 'Manage Users', href: '/dashboard/users', icon: UsersIcon, current: router.pathname === '/dashboard/users' ? true : false },
-    { id: 5, name: 'Manage Orders', href: '/dashboard/orders', icon: ChartBarIcon, current: router.pathname === '/dashboard/orders' ? true : false },
     { id: 6, name: 'Profile', href: '/dashboard/profile', icon: UserCircleIcon, current: router.pathname === '/dashboard/profile' ? true : false },
   ]
+
+  const adminRoute = [ 
+    { id: 4, name: 'Manage Users', href: '/dashboard/users', icon: UsersIcon, current: router.pathname === '/dashboard/users' ? true : false },
+    { id: 5, name: 'Manage Orders', href: '/dashboard/orders', icon: ChartBarIcon, current: router.pathname === '/dashboard/orders' ? true : false },
+  ]
+
+if(user.role === 'admin'){
+  navigation.push(...adminRoute)
+}
 
   return (
     <>

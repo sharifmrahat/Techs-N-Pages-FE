@@ -78,6 +78,7 @@ export default function UpdateProfile() {
                             !result?.success && <Alert message={result?.error} />
                           }
                         </div> */}
+                        Role: {user.role}
                       <div>
                           <label
                             htmlFor="name"
