@@ -41,18 +41,6 @@ function Dashboard({component}) {
     { id: 6, name: 'Profile', href: '/dashboard/profile', icon: UserCircleIcon, current: router.pathname === '/dashboard/profile' ? true : false },
   ]
 
-  // useEffect(() => {
-  //   if (currentUser.length === 0) {
-  //     setRefetch(true);
-  //   }
-  //   if (!currentUser.success) {
-  //     setRefetch(true);
-  //   }
-  //   else{
-  //     router.push('/')
-  //   }
-  // }, [currentUser, router, setRefetch, refetch]);
-
   return (
     <>
        <div className='pb-52 font-primary bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200'>

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/AuthProvider"
-// import useCurrentUser from "../hooks/useCurrentUser"
 
 
 /*
@@ -18,7 +17,6 @@ import { AuthContext } from "../context/AuthProvider"
   ```
 */
 export default function UpdateProfile() {
-    // const [currentUser] = useCurrentUser()
     const { user, loading } = useContext(AuthContext)
     let [profileInput, setProfileInput] = useState({
         name: user.name,
