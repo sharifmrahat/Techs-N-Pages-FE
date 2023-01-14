@@ -21,7 +21,7 @@ import DataTable from './DataTable'
 import useCurrentUser from '../../hooks/useCurrentUser'
 import Spinner from './Spinner'
 import Link from 'next/link'
-import withAuth from './WithAuth'
+import PrivateRoute from '../../context/PrivateRoutes'
 
 
 function classNames(...classes) {
@@ -181,4 +181,4 @@ function Dashboard({component}) {
     </>
   )
 }
-export default withAuth(Dashboard)
+export default PrivateRoute(Dashboard)

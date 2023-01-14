@@ -1,6 +1,5 @@
 import Dashboard from "../../../components/common/Dashboard";
 import DataTable from "../../../components/common/DataTable";
-import withAuth from "../../../components/common/WithAuth";
 
 function index() {
 
@@ -13,4 +12,4 @@ function index() {
 }
 
 
-export default withAuth(index);
+export default index;
