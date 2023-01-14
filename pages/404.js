@@ -15,7 +15,7 @@ export default function Error() {
           <body class="h-full">
           ```
         */}
-        <div className=" bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200 px-4 sm:px-6 md:grid md:place-items-center lg:px-8 pb-96 pt-28 transition-all duration-500">
+        <div className="bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200 px-4 sm:px-6 md:grid md:place-items-center lg:px-8 pb-96 pt-28 transition-all duration-500">
           <div className="mx-auto max-w-max">
             <main className="sm:flex">
               <p className="text-4xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400 sm:text-5xl">404</p>

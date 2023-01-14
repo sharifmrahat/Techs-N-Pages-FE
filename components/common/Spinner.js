@@ -18,7 +18,7 @@ export default function Spinner({type}) {
       size={30} />
       </div>
        </> : <>
-      <div className=" h-screen flex justify-center items-center mx-auto bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200">
+      <div className="flex justify-center items-center mx-auto bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-200 pb-96 pt-36">
 <RiseLoader
         color="#4f46e5" 
         loading={true} 
