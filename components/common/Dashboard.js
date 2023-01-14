@@ -18,10 +18,9 @@ import {
 } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
 import DataTable from './DataTable'
-import useCurrentUser from '../../hooks/useCurrentUser'
 import Spinner from './Spinner'
 import Link from 'next/link'
-import PrivateRoute from '../../context/PrivateRoutes'
+import PrivateRoute from '../../context/PrivateRoute'
 
 
 function classNames(...classes) {
@@ -30,7 +29,6 @@ function classNames(...classes) {
 
 function Dashboard({component}) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [currentUser, refetch, setRefetch, loading, error] = useCurrentUser();
 
   const router = useRouter()
 

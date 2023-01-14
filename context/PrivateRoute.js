@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-// import useCurrentUser fro../hooks/useCurrentUserser";
 import Login from "../pages/login";
 import Spinner from "../components/common/Spinner";
 import { AuthContext } from "./AuthProvider";

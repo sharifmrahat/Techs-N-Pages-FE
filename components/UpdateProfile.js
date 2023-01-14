@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react"
-import useCurrentUser from "../hooks/useCurrentUser"
+import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "../context/AuthProvider"
+// import useCurrentUser from "../hooks/useCurrentUser"
+
 
 /*
   This example requires some changes to your config:
@@ -16,11 +18,11 @@ import useCurrentUser from "../hooks/useCurrentUser"
   ```
 */
 export default function UpdateProfile() {
-    const [currentUser] = useCurrentUser()
-
+    // const [currentUser] = useCurrentUser()
+    const { user, loading } = useContext(AuthContext)
     let [profileInput, setProfileInput] = useState({
-        name: currentUser.data?.name,
-        email: currentUser.data?.email,
+        name: user.name,
+        email: user.email,
     })
 
     const handleInputs = (e) => {
@@ -63,10 +65,10 @@ export default function UpdateProfile() {
 
     useEffect(()=> {
         setProfileInput({
-            name: currentUser.data?.name,
-            email: currentUser.data?.email,
+            name: user.name,
+            email: user.email,
         })
-    }, [currentUser])
+    }, [user])
 
     return (
      <>
