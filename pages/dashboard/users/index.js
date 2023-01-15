@@ -105,7 +105,7 @@ console.log(users)
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm font-semibold">{user.name}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">{user.email}</td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm">{user.role?.charAt(0).toUpperCase()+user.role.slice(1)}</td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm">{user.role?.charAt(0).toUpperCase()+user.role?.slice(1)}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">{user.updatedAt}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">{user.isActive ? 'Active' : 'Inactive'}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
