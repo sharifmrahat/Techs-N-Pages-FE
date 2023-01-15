@@ -33,6 +33,7 @@ a {
   cursor:url(../images/cursor.cur), auto;
 } */
 
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
