@@ -91,7 +91,7 @@ console.log(users)
                 {users.map((user) => (
                   <tr key={user.email}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                      {user?.imageUrl ? <><img className="inline-block h-6 w-6 overflow-hidden rounded-full" src={user?.imageUrl} alt={user?.name} /></>  : <>
+                      {user?.imageURL ? <><img className="inline-block h-6 w-6 overflow-hidden rounded-full" src={user?.imageURL} alt={user?.name} /></>  : <>
                         <span className="inline-block h-6 w-6 overflow-hidden rounded-full bg-slate-800 dark:bg-slate-300">
                                 <svg
                                   className="h-full w-full text-slate-300  dark:text-slate-800"

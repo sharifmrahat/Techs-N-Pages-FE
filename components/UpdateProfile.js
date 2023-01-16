@@ -1,5 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/AuthProvider"
+import Alert from "./common/Alert"
+import Spinner from "./common/Spinner"
 
 
 /*
@@ -16,35 +19,43 @@ import { AuthContext } from "../context/AuthProvider"
   }
   ```
 */
-export default function UpdateProfile() {
-    const { user, loading } = useContext(AuthContext)
+export default function UpdateProfile({toggleView}) {
+    const { user, loading, callRefetch } = useContext(AuthContext)
+    const [result, setResult] = useState({})
+    const [submit, setSubmit] = useState(false)
     let [profileInput, setProfileInput] = useState({
         name: user.name,
         email: user.email,
+        imageURL: user?.imageURL
     })
 
     const handleInputs = (e) => {
         const inputName = e.target.name.value 
-        const inputEmail = e.target.email?.value 
+        const inputEmail = e.target.email?.value
+        const inputImageURL = e.target.imageURL?.value 
         setProfileInput({
             name: inputName,
-            email: inputEmail
+            email: inputEmail,
+            imageURL: inputImageURL
         })
     }
 
-    const handleUpdate = (e) => {
+    const handleUpdate = async(e) => {
         e.preventDefault()
+        setSubmit(true)
 
        const updateData = {
             name: e.target.name.value,
             email: e.target.email.value,
+            imageURL: e.target.imageURL?.value,
             currentPassword: e.target.currentPassword.value,
             newPassword: e.target.newPassword.value,
             confirmNewPassword: e.target.confirmNewPassword.value,
         }
 
         const url = `https://techs-n-pages.onrender.com/api/v1/user/update`
-        fetch(url, {
+        try {
+           await fetch(url, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
@@ -54,10 +65,25 @@ export default function UpdateProfile() {
             })
             .then(res => res.json())
             .then(data => {
-                if(data?.data?.modifiedCount){
+              if(data?.data){
+                setResult(data?.data)
+                setSubmit(false)
+              }
+              if(data?.data?.modifiedCount){
                     alert("Update Success")
+                    setSubmit(false)
+                    toggleView()
                 }
-            })
+                if(data.data.error){
+                  setSubmit(false)
+                  setResult(data.data)
+                }
+            }) 
+        } catch (error) {
+          setResult({error: error})
+          alert("Internal Server error!")
+          setSubmit(false)
+        }
 
     }
 
@@ -65,12 +91,23 @@ export default function UpdateProfile() {
         setProfileInput({
             name: user.name,
             email: user.email,
+            imageURL: user.imageURL
         })
-    }, [user])
 
+        if(result?.modifiedCount){
+          callRefetch()
+          toggleView()
+        }
+    }, [user, callRefetch, result])
+
+    
+
+    console.log(result)
     return (
      <>
-             <div className="m-5 lg:m-10 mx-auto lg:mx-auto w-max lg:w-1/2 bg-slate-200 dark:bg-slate-800  rounded-md shadow-md p-5 font-primary text-slate-900 dark:text-slate-200">
+        {
+          loading ? <Spinner/> : <>
+           <div className="m-5 lg:m-10 mx-auto lg:mx-auto w-max lg:w-1/2 bg-slate-200 dark:bg-slate-800  rounded-md shadow-md p-5 font-primary text-slate-900 dark:text-slate-200">
                     <div>
                       <form onSubmit={handleUpdate} onChange={handleInputs}  className="space-y-6">
                         {/* <div className={`${!result?.error ? 'hidden' : 'block'}`}>
@@ -78,13 +115,53 @@ export default function UpdateProfile() {
                             !result?.success && <Alert message={result?.error} />
                           }
                         </div> */}
-                        Role: {user.role}
+                        <div
+                                    className={`${
+                                      !result?.error ? "hidden" : "block"
+                                    }`}
+                                  >
+                                    {!result?.success && (
+                                      <Alert message={result?.error} />
+                                    )}
+                                  </div>
+                      <div className="flex justify-center">
+                        {
+                          user?.imageURL ? <>
+                          <img className="inline-block h-16 w-16 overflow-hidden rounded-full" src={user?.imageURL} alt={user?.email} /></>  : <>
+                          <span className="inline-block h-16 w-16 overflow-hidden rounded-full bg-slate-800 dark:bg-slate-300">
+                                  <svg
+                                    className="h-full w-full text-slate-300  dark:text-slate-800"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                  </svg>
+                                </span>
+                        </>
+                        }
+                      </div>
+                      <div>
+                          <label
+                            htmlFor="imageURL"
+                            className="block text-sm font-medium mb-1 text-slate-800 dark:text-slate-300"
+                          >
+                            Image URL
+                          </label>
+                          <input
+                            type="text"
+                            name="imageURL"
+                            id="imageURL"
+                            value={profileInput.imageURL}
+                            placeholder="Enter your email"
+                            className="block w-full rounded-md  py-3 px-4 bg-slate-300 dark:bg-gray-700 shadow-sm focus:outline-none"
+                          />
+                        </div>
                       <div>
                           <label
                             htmlFor="name"
                             className="block text-sm font-medium mb-1 text-slate-800 dark:text-slate-300"
                           >
-                            Name: 
+                            Name
                           </label>
                           <input
                             type="text"
@@ -160,16 +237,23 @@ export default function UpdateProfile() {
                         </div>
 
                         <div>
-                          <button
+                          {
+                            submit ? 
+                            <Spinner type="clip"></Spinner> 
+                            : <button
                             type="submit"
                             className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 dark:bg-indigo-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                           >
                             Update
                           </button>
+                          }
+                          
                         </div>
                       </form>
                     </div>
                   </div>
+          </>
+        }
      </>
     )
   }

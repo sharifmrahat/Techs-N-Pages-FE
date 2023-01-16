@@ -320,7 +320,7 @@ export default function Menubar() {
                       <div>
                         <Menu.Button className="flex max-w-xs items-center rounded-full text-sm focus:outline-none ">
                           <span className="sr-only">Open user menu</span>
-                          {!user?.imageUrl ? (
+                          {!user?.imageURL ? (
                             <>
                               <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-slate-800 dark:bg-slate-300">
                                 <svg
@@ -335,8 +335,8 @@ export default function Menubar() {
                           ) : (
                             <>
                               <img
-                                className="h-8 w-8 rounded-full"
-                                src={user?.imageUrl}
+                                className="h-10 w-10 rounded-full border-2 border-slate-700 dark:border-indigo-200"
+                                src={user?.imageURL}
                                 alt=""
                               />
                             </>
@@ -436,7 +436,7 @@ export default function Menubar() {
                       <div>
                         <Menu.Button className="flex max-w-xs items-center rounded-full text-sm focus:outline-none ">
                           <span className="sr-only">Open user menu</span>
-                          {!user?.imageUrl ? (
+                          {!user?.imageURL ? (
                             <>
                               <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-slate-800 dark:bg-slate-300">
                                 <svg
@@ -451,8 +451,8 @@ export default function Menubar() {
                           ) : (
                             <>
                               <img
-                                className="h-8 w-8 rounded-full"
-                                src={user?.imageUrl}
+                                className="h-10 w-10 rounded-full border-2 border-slate-700 dark:border-indigo-200"
+                                src={user?.imageURL}
                                 alt=""
                               />
                             </>
