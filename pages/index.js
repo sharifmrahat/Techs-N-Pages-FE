@@ -4,6 +4,7 @@ import Spinner from '../components/common/Spinner'
 import Companies from '../components/Companies'
 import Features from '../components/Feature'
 import HeroSection from '../components/HeroSection'
+import Reviews from '../components/Reviews'
 import Stats from '../components/Stats'
 import Tags from '../components/Tags'
 
@@ -22,6 +23,7 @@ useEffect(()=> {
         <Stats></Stats>
         <BooksCard books={randomBooks} heading="Latest Published Books"></BooksCard>
         <Features></Features>
+        <Reviews></Reviews>
         <Tags></Tags>
         <Companies></Companies>
       </main>
